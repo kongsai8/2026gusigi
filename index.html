@@ -1,36 +1,68 @@
 <!DOCTYPE html>
+<!-- 이 파일이 HTML5 표준으로 작성되었음을 브라우저에 알립니다. -->
 <html lang="ko">
 <head>
+    <!-- 한글 및 특수문자가 깨지지 않도록 문자 인코딩을 UTF-8로 설정합니다. -->
     <meta charset="UTF-8">
+    <!-- 모바일 및 다양한 기기 화면 크기에 맞게 웹사이트 비율을 맞춰줍니다. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 브라우저 탭에 표시되는 웹사이트의 제목입니다. -->
     <title>내 첫 웹사이트</title>
+
+    <!-- <style> 태그 내부에는 웹사이트의 디자인(CSS)을 정의합니다. -->
     <style>
+        /* 웹페이지 전체 배경 및 정렬 스타일 */
         body {
+            /* 글꼴 모양 설정 */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Flexbox 레이아웃을 사용해 내부 콘텐츠를 중앙에 쉽게 배치합니다. */
             display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            justify-content: center; /* 가로 방향 중앙 정렬 */
+            align-items: center;     /* 세로 방향 중앙 정렬 */
+            height: 100vh;           /* 화면 높이 전체(100%)를 사용합니다. */
+            margin: 0;               /* 브라우저 기본 여백을 제거합니다. */
+            /* 예쁜 보라색 사선 그라데이션 배경을 만듭니다. */
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
+            color: white;            /* 기본 글자 색상을 흰색으로 지정합니다. */
+            text-align: center;      /* 텍스트를 가운데 정렬합니다. */
         }
+
+        /* 중앙에 들어가는 유리 느낌의 카드 상자 스타일 (Glassmorphism) */
         .card {
+            /* 반투명한 흰색 배경을 넣습니다. */
             background: rgba(255, 255, 255, 0.15);
-            padding: 40px;
-            border-radius: 20px;
+            padding: 40px;           /* 카드 안쪽 여백 설정 */
+            border-radius: 20px;     /* 모서리를 동글동글하게 만듭니다. */
+            /* 뒷배경이 흐릿하게 보이는 '유리 효과'를 부여합니다. */
             backdrop-filter: blur(10px);
+            /* 카드가 살짝 떠 있는 듯한 그림자 효과를 줍니다. */
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+            /* 👇 카드 상자의 가로 길이를 넓혀주는 스타일 설정 */
+            width: 85%;              /* 화면 가로 너비의 85%를 사용합니다. */
+            max-width: 650px;        /* 너무 커지지 않도록 최대 너비를 650px로 넓혔습니다. */
         }
-        h1 { margin-bottom: 10px; }
-        p { font-size: 1.2rem; opacity: 0.9; }
+
+        /* 큰 제목(h1) 스타일 */
+        h1 { 
+            margin-bottom: 10px;    /* 제목 아래쪽에 살짝 여백을 줍니다. */
+        }
+
+        /* 설명글(p) 스타일 */
+        p { 
+            font-size: 1.2rem;       /* 글자 크기를 살짝 키웁니다. */
+            opacity: 0.9;            /* 투명도를 90%로 주어 부드럽게 보입니다. */
+        }
     </style>
 </head>
 <body>
+    <!-- 카드 모양 상자 영역 시작 -->
     <div class="card">
+        <!-- 메인 제목 -->
         <h1>👋 Welcome to My Website!</h1>
+        <!-- 부제목 및 소개글 -->
         <p>깃허브로 만든 저의 첫 번째 웹사이트입니다.</p>
     </div>
+    <!-- 카드 모양 상자 영역 끝 -->
 </body>
 </html>
