@@ -6,18 +6,16 @@
     <title>2026 제2회 거시기 연말 시상식</title>
 
     <style>
-        /* 웹페이지 기본 및 배경 스타일 (단색 검정색) */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        /* 기본 설정: 풀페이지 스크롤을 위해 스크롤바 숨기기 및 기본 스타일 초기화 */
+        html, body {
             margin: 0;
-            padding-top: 60px;
-            
-            /* 👇 그라데이션 제거 후 완전한 검정색 지정 */
-            background-color: #202020;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* 브라우저 기본 스크롤 제거 */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: white;
             text-align: center;
-            min-height: 100vh;
-            box-sizing: border-box;
         }
 
         /* 🔝 상단바 고정 스타일 */
@@ -27,9 +25,9 @@
             left: 0;
             width: 100%;
             height: 60px;
-            background: rgba(0, 0, 0, 0.8); /* 배경이 완전히 어두우므로 약간 투명한 검정 유지 */
+            background: rgba(32, 32, 32, 0.85);
             backdrop-filter: blur(8px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
             z-index: 2000;
 
             display: flex;
@@ -39,7 +37,6 @@
             box-sizing: border-box;
         }
 
-        /* 좌측 탭 목록 (버튼) */
         .nav-left {
             display: flex;
             gap: 12px;
@@ -58,11 +55,10 @@
         }
 
         .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
             border-color: #ffffff;
         }
 
-        /* 중앙 제목 */
         .nav-center-title {
             position: absolute;
             left: 50%;
@@ -73,12 +69,61 @@
             white-space: nowrap;
         }
 
-        /* 메인 영역 구획 */
-        .main-container {
-            width: 100%;
+        /* 🔴 좌측 인디케이터 (세로 4개 점) */
+        .indicator {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
             display: flex;
             flex-direction: column;
+            gap: 16px;
+            z-index: 1000;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* 현재 활성화된 점 (크기 확 커짐) */
+        .dot.active {
+            width: 18px;
+            height: 18px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            transform: translateX(-4px); /* 중앙 정렬 유지용 미세조정 */
+        }
+
+        /* 📜 풀페이지 슬라이더 컨테이너 */
+        .fullpage-container {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        /* 공통 섹션 스타일 */
+        .section {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
             align-items: center;
+            box-sizing: border-box;
+            padding-top: 60px; /* 상단바 여백 */
+        }
+
+        /* 🎨 홀수/짝수 페이지 배경색 지정 */
+        .section:nth-child(odd) {
+            background-color: #202020; /* 1, 3 페이지 (기존 배경색) */
+        }
+
+        .section:nth-child(even) {
+            background-color: #d30072; /* 2, 4 페이지 */
         }
 
         /* 📱 모바일 화면 대응 */
@@ -89,6 +134,9 @@
             .nav-btn {
                 font-size: 0.75rem;
                 padding: 5px 8px;
+            }
+            .indicator {
+                left: 12px; /* 모바일에서는 좌측 여백 약간 줄임 */
             }
         }
     </style>
@@ -107,9 +155,115 @@
         <div style="width: 40px;"></div>
     </header>
 
-    <!-- 메인 컨텐츠 배치용 영역 (현재 비어있음) -->
-    <main class="main-container">
-    </main>
+    <!-- 🔴 좌측 인디케이터 (세로 4개 점) -->
+    <div class="indicator">
+        <div class="dot active" onclick="scrollToSection(0)"></div>
+        <div class="dot" onclick="scrollToSection(1)"></div>
+        <div class="dot" onclick="scrollToSection(2)"></div>
+        <div class="dot" onclick="scrollToSection(3)"></div>
+    </div>
 
+    <!-- 📜 메인 4개 섹션 영역 -->
+    <div class="fullpage-container" id="mainContainer">
+        <section class="section">
+            <h1>PAGE 1</h1>
+        </section>
+        <section class="section">
+            <h1>PAGE 2</h1>
+        </section>
+        <section class="section">
+            <h1>PAGE 3</h1>
+        </section>
+        <section class="section">
+            <h1>PAGE 4</h1>
+        </section>
+    </div>
+
+    <!-- ⚙️ 스크롤 및 인디케이터 동작 자바스크립트 -->
+    <script>
+        let currentIdx = 0;
+        const totalSections = 4;
+        let isScrolling = false; // 연달아 스크롤되는 것 방지용 플래그
+        const container = document.getElementById('mainContainer');
+        const dots = document.querySelectorAll('.dot');
+
+        // 특정 섹션으로 이동시키는 함수
+        function scrollToSection(index) {
+            currentIdx = index;
+            container.style.transform = `translateY(-${currentIdx * 100}vh)`;
+
+            // 인디케이터 점 크기 업데이트
+            dots.forEach((dot, idx) => {
+                if (idx === currentIdx) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // 휠 스크롤 이벤트 (PC 전용)
+        window.addEventListener('wheel', (e) => {
+            if (isScrolling) return;
+
+            isScrolling = true;
+
+            if (e.deltaY > 0) {
+                // 아래로 스크롤
+                if (currentIdx === totalSections - 1) {
+                    scrollToSection(0); // 맨 아래에서 스크롤 시 맨 위로 루프
+                } else {
+                    scrollToSection(currentIdx + 1);
+                }
+            } else {
+                // 위로 스크롤
+                if (currentIdx === 0) {
+                    scrollToSection(totalSections - 1); // 맨 위에서 올릴 시 맨 아래로 루프
+                } else {
+                    scrollToSection(currentIdx - 1);
+                }
+            }
+
+            // 스크롤 애니메이션 지속시간(0.7초) 동안 쿨타임 주기
+            setTimeout(() => {
+                isScrolling = false;
+            }, 700);
+        }, { passive: true });
+
+        // 터치 스와이프 이벤트 (모바일 전용)
+        let startY = 0;
+        window.addEventListener('touchstart', (e) => {
+            startY = e.touches[0].clientY;
+        });
+
+        window.addEventListener('touchend', (e) => {
+            if (isScrolling) return;
+            const endY = e.changedTouches[0].clientY;
+            const diffY = startY - endY;
+
+            if (Math.abs(diffY) > 50) { // 최소 50px 이상 쓸어넘겼을 때 동작
+                isScrolling = true;
+                if (diffY > 0) {
+                    // 손가락을 위로 올려 아래 페이지로 이동
+                    if (currentIdx === totalSections - 1) {
+                        scrollToSection(0);
+                    } else {
+                        scrollToSection(currentIdx + 1);
+                    }
+                } else {
+                    // 손가락을 아래로 내려 위 페이지로 이동
+                    if (currentIdx === 0) {
+                        scrollToSection(totalSections - 1);
+                    } else {
+                        scrollToSection(currentIdx - 1);
+                    }
+                }
+
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 700);
+            }
+        });
+    </script>
 </body>
 </html>
