@@ -6,28 +6,27 @@
     <title>2026 제2회 거시기 연말 시상식</title>
 
     <style>
-        /* 기본 설정: 풀페이지 스크롤을 위해 스크롤바 숨기기 및 기본 스타일 초기화 */
+        /* 기본 설정 */
         html, body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden; /* 브라우저 기본 스크롤 제거 */
+            overflow: hidden;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
             text-align: center;
         }
 
-        /* 🔝 상단바 고정 스타일 */
+        /* 🔝 상단바 고정 스타일 (투명도 없이 완전 밀폐 단색) */
         .top-navbar {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 60px;
-            background: rgba(32, 32, 32, 0.85);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+            /* 초기색상: 1페이지 배경색과 100% 동일한 불투명 색상 */
+            background-color: #522196; 
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
             z-index: 2000;
 
             display: flex;
@@ -35,6 +34,9 @@
             justify-content: space-between;
             padding: 0 20px;
             box-sizing: border-box;
+
+            /* 배경색 및 텍스트 색상 전환 0.7초 보간 */
+            transition: background-color 0.7s cubic-bezier(0.65, 0, 0.35, 1), color 0.7s cubic-bezier(0.65, 0, 0.35, 1);
         }
 
         .nav-left {
@@ -44,8 +46,8 @@
 
         .nav-btn {
             background: transparent;
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: inherit; /* 상단바 현재 텍스트 색상 상속 */
+            border: 1px solid currentColor;
             padding: 6px 12px;
             border-radius: 6px;
             font-size: 0.85rem;
@@ -55,8 +57,8 @@
         }
 
         .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: #ffffff;
+            opacity: 0.8;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .nav-center-title {
@@ -69,7 +71,7 @@
             white-space: nowrap;
         }
 
-        /* 🔴 좌측 인디케이터 (세로 4개 점) */
+        /* 🔴 좌측 인디케이터 */
         .indicator {
             position: fixed;
             left: 20px;
@@ -84,19 +86,19 @@
         .dot {
             width: 10px;
             height: 10px;
-            background-color: rgba(255, 255, 255, 0.4);
+            background-color: currentColor;
+            opacity: 0.4;
             border-radius: 50%;
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* 현재 활성화된 점 (크기 확 커짐) */
         .dot.active {
             width: 18px;
             height: 18px;
-            background-color: #ffffff;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-            transform: translateX(-4px); /* 중앙 정렬 유지용 미세조정 */
+            opacity: 1;
+            box-shadow: 0 0 10px currentColor;
+            transform: translateX(-4px);
         }
 
         /* 📜 풀페이지 슬라이더 컨테이너 */
@@ -106,7 +108,6 @@
             transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
         }
 
-        /* 공통 섹션 스타일 */
         .section {
             width: 100%;
             height: 100vh;
@@ -114,19 +115,21 @@
             justify-content: center;
             align-items: center;
             box-sizing: border-box;
-            padding-top: 60px; /* 상단바 여백 */
+            padding-top: 60px;
         }
 
-        /* 🎨 홀수/짝수 페이지 배경색 지정 */
+        /* 🎨 홀수 페이지 (1, 3 페이지) */
         .section:nth-child(odd) {
-            background-color: #202020; /* 1, 3 페이지 (기존 배경색) */
+            background-color: #522196;
+            color: #5fbbef;
         }
 
+        /* 🎨 짝수 페이지 (2, 4 페이지) */
         .section:nth-child(even) {
-            background-color: #d30072; /* 2, 4 페이지 */
+            background-color: #ffdbd0;
+            color: #cd2382;
         }
 
-        /* 📱 모바일 화면 대응 */
         @media (max-width: 600px) {
             .nav-center-title {
                 font-size: 0.95rem;
@@ -136,7 +139,7 @@
                 padding: 5px 8px;
             }
             .indicator {
-                left: 12px; /* 모바일에서는 좌측 여백 약간 줄임 */
+                left: 12px;
             }
         }
     </style>
@@ -144,7 +147,7 @@
 <body>
 
     <!-- 🔝 상단바 헤더 영역 -->
-    <header class="top-navbar">
+    <header class="top-navbar" id="topNavbar">
         <div class="nav-left">
             <a href="#apply" class="nav-btn">참가지원서작성</a>
             <a href="#vote" class="nav-btn">투표참여</a>
@@ -155,8 +158,8 @@
         <div style="width: 40px;"></div>
     </header>
 
-    <!-- 🔴 좌측 인디케이터 (세로 4개 점) -->
-    <div class="indicator">
+    <!-- 🔴 좌측 인디케이터 -->
+    <div class="indicator" id="indicatorDots">
         <div class="dot active" onclick="scrollToSection(0)"></div>
         <div class="dot" onclick="scrollToSection(1)"></div>
         <div class="dot" onclick="scrollToSection(2)"></div>
@@ -179,20 +182,32 @@
         </section>
     </div>
 
-    <!-- ⚙️ 스크롤 및 인디케이터 동작 자바스크립트 -->
     <script>
         let currentIdx = 0;
         const totalSections = 4;
-        let isScrolling = false; // 연달아 스크롤되는 것 방지용 플래그
+        let isScrolling = false;
         const container = document.getElementById('mainContainer');
         const dots = document.querySelectorAll('.dot');
+        const navbar = document.getElementById('topNavbar');
+        const indicator = document.getElementById('indicatorDots');
 
-        // 특정 섹션으로 이동시키는 함수
+        // 각 페이지 배경색 (투명도 없는 완전 단색)
+        const bgColors = ['#522196', '#ffdbd0', '#522196', '#ffdbd0'];
+        // 각 페이지 글자색
+        const textColors = ['#5fbbef', '#cd2382', '#5fbbef', '#cd2382'];
+
         function scrollToSection(index) {
             currentIdx = index;
             container.style.transform = `translateY(-${currentIdx * 100}vh)`;
 
-            // 인디케이터 점 크기 업데이트
+            // 상단바 배경색 및 글자색 완벽 동기화
+            navbar.style.backgroundColor = bgColors[currentIdx];
+            navbar.style.color = textColors[currentIdx];
+            
+            // 좌측 인디케이터 색상도 글자색에 맞게 톤 교체
+            indicator.style.color = textColors[currentIdx];
+
+            // 인디케이터 점 활성화
             dots.forEach((dot, idx) => {
                 if (idx === currentIdx) {
                     dot.classList.add('active');
@@ -202,35 +217,34 @@
             });
         }
 
-        // 휠 스크롤 이벤트 (PC 전용)
+        // 초기 색상 세팅
+        scrollToSection(0);
+
+        // 휠 스크롤 이벤트 (PC)
         window.addEventListener('wheel', (e) => {
             if (isScrolling) return;
-
             isScrolling = true;
 
             if (e.deltaY > 0) {
-                // 아래로 스크롤
                 if (currentIdx === totalSections - 1) {
-                    scrollToSection(0); // 맨 아래에서 스크롤 시 맨 위로 루프
+                    scrollToSection(0);
                 } else {
                     scrollToSection(currentIdx + 1);
                 }
             } else {
-                // 위로 스크롤
                 if (currentIdx === 0) {
-                    scrollToSection(totalSections - 1); // 맨 위에서 올릴 시 맨 아래로 루프
+                    scrollToSection(totalSections - 1);
                 } else {
                     scrollToSection(currentIdx - 1);
                 }
             }
 
-            // 스크롤 애니메이션 지속시간(0.7초) 동안 쿨타임 주기
             setTimeout(() => {
                 isScrolling = false;
             }, 700);
         }, { passive: true });
 
-        // 터치 스와이프 이벤트 (모바일 전용)
+        // 터치 스와이프 이벤트 (모바일)
         let startY = 0;
         window.addEventListener('touchstart', (e) => {
             startY = e.touches[0].clientY;
@@ -241,17 +255,15 @@
             const endY = e.changedTouches[0].clientY;
             const diffY = startY - endY;
 
-            if (Math.abs(diffY) > 50) { // 최소 50px 이상 쓸어넘겼을 때 동작
+            if (Math.abs(diffY) > 50) {
                 isScrolling = true;
                 if (diffY > 0) {
-                    // 손가락을 위로 올려 아래 페이지로 이동
                     if (currentIdx === totalSections - 1) {
                         scrollToSection(0);
                     } else {
                         scrollToSection(currentIdx + 1);
                     }
                 } else {
-                    // 손가락을 아래로 내려 위 페이지로 이동
                     if (currentIdx === 0) {
                         scrollToSection(totalSections - 1);
                     } else {
