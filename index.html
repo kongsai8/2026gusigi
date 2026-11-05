@@ -17,26 +17,71 @@
             text-align: center;
         }
 
-        /* 🔝 상단바 고정 스타일 (투명도 없이 완전 밀폐 단색) */
-        .top-navbar {
+        /* 🔴 좌측 인디케이터 (화면에 완전 고정) */
+        .indicator {
             position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            z-index: 3000;
+            transition: color 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: currentColor;
+            opacity: 0.4;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .dot.active {
+            width: 18px;
+            height: 18px;
+            opacity: 1;
+            box-shadow: 0 0 10px currentColor;
+            transform: translateX(-4px);
+        }
+
+        /* 📜 풀페이지 슬라이더 컨테이너 (상단바와 페이지가 한몸으로 움직임) */
+        .fullpage-container {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .section {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        /* 🔝 각 섹션 내부에 종속된 상단바 (함께 스크롤됨) */
+        .page-navbar {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 60px;
-            /* 초기색상: 1페이지 배경색과 100% 동일한 불투명 색상 */
-            background-color: #522196; 
+            background-color: transparent;
             border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-            z-index: 2000;
 
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 20px;
             box-sizing: border-box;
-
-            /* 배경색 및 텍스트 색상 전환 0.7초 보간 */
-            transition: background-color 0.7s cubic-bezier(0.65, 0, 0.35, 1), color 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+            color: inherit;
         }
 
         .nav-left {
@@ -46,7 +91,7 @@
 
         .nav-btn {
             background: transparent;
-            color: inherit; /* 상단바 현재 텍스트 색상 상속 */
+            color: inherit;
             border: 1px solid currentColor;
             padding: 6px 12px;
             border-radius: 6px;
@@ -71,60 +116,13 @@
             white-space: nowrap;
         }
 
-        /* 🔴 좌측 인디케이터 */
-        .indicator {
-            position: fixed;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            z-index: 1000;
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            background-color: currentColor;
-            opacity: 0.4;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        .dot.active {
-            width: 18px;
-            height: 18px;
-            opacity: 1;
-            box-shadow: 0 0 10px currentColor;
-            transform: translateX(-4px);
-        }
-
-        /* 📜 풀페이지 슬라이더 컨테이너 */
-        .fullpage-container {
-            width: 100%;
-            height: 100%;
-            transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
-        }
-
-        .section {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-sizing: border-box;
-            padding-top: 60px;
-        }
-
-        /* 🎨 홀수 페이지 (1, 3 페이지) */
+        /* 🎨 홀수 페이지 (1, 3 페이지) 색상 지정 */
         .section:nth-child(odd) {
             background-color: #522196;
             color: #5fbbef;
         }
 
-        /* 🎨 짝수 페이지 (2, 4 페이지) */
+        /* 🎨 짝수 페이지 (2, 4 페이지) 색상 지정 */
         .section:nth-child(even) {
             background-color: #ffdbd0;
             color: #cd2382;
@@ -146,19 +144,7 @@
 </head>
 <body>
 
-    <!-- 🔝 상단바 헤더 영역 -->
-    <header class="top-navbar" id="topNavbar">
-        <div class="nav-left">
-            <a href="#apply" class="nav-btn">참가지원서작성</a>
-            <a href="#vote" class="nav-btn">투표참여</a>
-        </div>
-        <div class="nav-center-title">
-            2026 제2회 거시기 연말 시상식
-        </div>
-        <div style="width: 40px;"></div>
-    </header>
-
-    <!-- 🔴 좌측 인디케이터 -->
+    <!-- 🔴 좌측 인디케이터 (화면 고정) -->
     <div class="indicator" id="indicatorDots">
         <div class="dot active" onclick="scrollToSection(0)"></div>
         <div class="dot" onclick="scrollToSection(1)"></div>
@@ -166,20 +152,61 @@
         <div class="dot" onclick="scrollToSection(3)"></div>
     </div>
 
-    <!-- 📜 메인 4개 섹션 영역 -->
+    <!-- 📜 메인 4개 섹션 영역 (상단바 포함 전체 이동) -->
     <div class="fullpage-container" id="mainContainer">
+        
+        <!-- PAGE 1 -->
         <section class="section">
+            <header class="page-navbar">
+                <div class="nav-left">
+                    <a href="#apply" class="nav-btn">참가지원서작성</a>
+                    <a href="#vote" class="nav-btn">투표참여</a>
+                </div>
+                <div class="nav-center-title">2026 제2회 거시기 연말 시상식</div>
+                <div style="width: 40px;"></div>
+            </header>
             <h1>PAGE 1</h1>
         </section>
+
+        <!-- PAGE 2 -->
         <section class="section">
+            <header class="page-navbar">
+                <div class="nav-left">
+                    <a href="#apply" class="nav-btn">참가지원서작성</a>
+                    <a href="#vote" class="nav-btn">투표참여</a>
+                </div>
+                <div class="nav-center-title">2026 제2회 거시기 연말 시상식</div>
+                <div style="width: 40px;"></div>
+            </header>
             <h1>PAGE 2</h1>
         </section>
+
+        <!-- PAGE 3 -->
         <section class="section">
+            <header class="page-navbar">
+                <div class="nav-left">
+                    <a href="#apply" class="nav-btn">참가지원서작성</a>
+                    <a href="#vote" class="nav-btn">투표참여</a>
+                </div>
+                <div class="nav-center-title">2026 제2회 거시기 연말 시상식</div>
+                <div style="width: 40px;"></div>
+            </header>
             <h1>PAGE 3</h1>
         </section>
+
+        <!-- PAGE 4 -->
         <section class="section">
+            <header class="page-navbar">
+                <div class="nav-left">
+                    <a href="#apply" class="nav-btn">참가지원서작성</a>
+                    <a href="#vote" class="nav-btn">투표참여</a>
+                </div>
+                <div class="nav-center-title">2026 제2회 거시기 연말 시상식</div>
+                <div style="width: 40px;"></div>
+            </header>
             <h1>PAGE 4</h1>
         </section>
+
     </div>
 
     <script>
@@ -188,26 +215,18 @@
         let isScrolling = false;
         const container = document.getElementById('mainContainer');
         const dots = document.querySelectorAll('.dot');
-        const navbar = document.getElementById('topNavbar');
         const indicator = document.getElementById('indicatorDots');
 
-        // 각 페이지 배경색 (투명도 없는 완전 단색)
-        const bgColors = ['#522196', '#ffdbd0', '#522196', '#ffdbd0'];
-        // 각 페이지 글자색
+        // 각 페이지 글자색 (인디케이터 점 색상용)
         const textColors = ['#5fbbef', '#cd2382', '#5fbbef', '#cd2382'];
 
         function scrollToSection(index) {
             currentIdx = index;
             container.style.transform = `translateY(-${currentIdx * 100}vh)`;
-
-            // 상단바 배경색 및 글자색 완벽 동기화
-            navbar.style.backgroundColor = bgColors[currentIdx];
-            navbar.style.color = textColors[currentIdx];
             
-            // 좌측 인디케이터 색상도 글자색에 맞게 톤 교체
+            // 고정된 좌측 인디케이터 점 색상만 페이지 분위기에 맞게 전환
             indicator.style.color = textColors[currentIdx];
 
-            // 인디케이터 점 활성화
             dots.forEach((dot, idx) => {
                 if (idx === currentIdx) {
                     dot.classList.add('active');
@@ -217,10 +236,9 @@
             });
         }
 
-        // 초기 색상 세팅
         scrollToSection(0);
 
-        // 휠 스크롤 이벤트 (PC)
+        // 휠 스크롤 이벤트
         window.addEventListener('wheel', (e) => {
             if (isScrolling) return;
             isScrolling = true;
@@ -244,7 +262,7 @@
             }, 700);
         }, { passive: true });
 
-        // 터치 스와이프 이벤트 (모바일)
+        // 터치 스와이프 이벤트
         let startY = 0;
         window.addEventListener('touchstart', (e) => {
             startY = e.touches[0].clientY;
