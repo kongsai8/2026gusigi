@@ -1,68 +1,162 @@
 <!DOCTYPE html>
-<!-- 이 파일이 HTML5 표준으로 작성되었음을 브라우저에 알립니다. -->
 <html lang="ko">
 <head>
-    <!-- 한글 및 특수문자가 깨지지 않도록 문자 인코딩을 UTF-8로 설정합니다. -->
     <meta charset="UTF-8">
-    <!-- 모바일 및 다양한 기기 화면 크기에 맞게 웹사이트 비율을 맞춰줍니다. -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- 브라우저 탭에 표시되는 웹사이트의 제목입니다. -->
-    <title>내 첫 웹사이트</title>
+    <title>2026 제2회 거시기 연말 시상식</title>
 
-    <!-- <style> 태그 내부에는 웹사이트의 디자인(CSS)을 정의합니다. -->
     <style>
-        /* 웹페이지 전체 배경 및 정렬 스타일 */
+        /* 웹페이지 기본 및 배경 스타일 */
         body {
-            /* 글꼴 모양 설정 */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* Flexbox 레이아웃을 사용해 내부 콘텐츠를 중앙에 쉽게 배치합니다. */
+            margin: 0;
+            padding-top: 80px;   /* 상단바에 내용이 가려지지 않도록 여백 지정 */
+            padding-bottom: 100px; /* 하단 고정 버튼 여백 */
+            
+            background: linear-gradient(to bottom, #000000 0%, #d63384 100%);
+            color: white;
+            text-align: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* 🔝 상단바 고정 스타일 */
+        .top-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.6); /* 반투명 검정 배경 */
+            backdrop-filter: blur(8px);       /* 블러 효과 */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 2000;
+
             display: flex;
-            justify-content: center; /* 가로 방향 중앙 정렬 */
-            align-items: center;     /* 세로 방향 중앙 정렬 */
-            height: 100vh;           /* 화면 높이 전체(100%)를 사용합니다. */
-            margin: 0;               /* 브라우저 기본 여백을 제거합니다. */
-            /* 사선 그라데이션 배경을 만듭니다. */
-            background: linear-gradient(to bottom, #000000 0%, #0a1128 100%);
-            color: white;            /* 기본 글자 색상을 흰색으로 지정합니다. */
-            text-align: center;      /* 텍스트를 가운데 정렬합니다. */
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            box-sizing: border-box;
         }
 
-        /* 중앙에 들어가는 유리 느낌의 카드 상자 스타일 (Glassmorphism) */
+        /* 좌측 탭 목록 (버튼) */
+        .nav-left {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #ffffff;
+        }
+
+        /* 중앙 제목 */
+        .nav-center-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: -0.5px;
+            white-space: nowrap;
+        }
+
+        /* 중앙 카드 상자 스타일 */
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 180px);
+            padding: 20px;
+        }
+
         .card {
-            /* 반투명한 흰색 배경을 넣습니다. */
-            background: rgba(255, 255, 255, 0.15);
-            padding: 40px;           /* 카드 안쪽 여백 설정 */
-            border-radius: 20px;     /* 모서리를 동글동글하게 만듭니다. */
-            /* 뒷배경이 흐릿하게 보이는 '유리 효과'를 부여합니다. */
+            background: rgba(255, 255, 255, 0.12);
+            padding: 40px;
+            border-radius: 20px;
             backdrop-filter: blur(10px);
-            /* 카드가 살짝 떠 있는 듯한 그림자 효과를 줍니다. */
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-
-            /* 👇 카드 상자의 가로 길이를 넓혀주는 스타일 설정 */
-            width: 85%;              /* 화면 가로 너비의 85%를 사용합니다. */
-            max-width: 650px;        /* 너무 커지지 않도록 최대 너비를 650px로 넓혔습니다. */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+            width: 85%;
+            max-width: 650px;
         }
 
-        /* 큰 제목(h1) 스타일 */
-        h1 { 
-            margin-bottom: 10px;    /* 제목 아래쪽에 살짝 여백을 줍니다. */
+        /* 하단 고정 이미지 버튼 스타일 */
+        .fixed-bottom-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: inline-block;
+            cursor: pointer;
+            transition: transform 0.2s ease;
         }
 
-        /* 설명글(p) 스타일 */
-        p { 
-            font-size: 1.2rem;       /* 글자 크기를 살짝 키웁니다. */
-            opacity: 0.9;            /* 투명도를 90%로 주어 부드럽게 보입니다. */
+        .fixed-bottom-btn:active {
+            transform: translateX(-50%) scale(0.95);
+        }
+
+        .fixed-bottom-btn img {
+            width: 300px;
+            max-width: 85vw;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* 📱 모바일 화면 대응 (제목 글자 크기 살짝 조정) */
+        @media (max-width: 600px) {
+            .nav-center-title {
+                font-size: 0.95rem;
+            }
+            .nav-btn {
+                font-size: 0.75rem;
+                padding: 5px 8px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 카드 모양 상자 영역 시작 -->
-    <div class="card">
-        <!-- 메인 제목 -->
-        <h1>👋 Welcome to My Website!</h1>
-        <!-- 부제목 및 소개글 -->
-        <p>깃허브로 만든 저의 첫 번째 웹사이트입니다.</p>
+
+    <!-- 🔝 상단바 헤더 영역 -->
+    <header class="top-navbar">
+        <div class="nav-left">
+            <a href="#apply" class="nav-btn">참가지원서작성</a>
+            <a href="#vote" class="nav-btn">투표참여</a>
+        </div>
+        <div class="nav-center-title">
+            2026 제2회 거시기 연말 시상식
+        </div>
+        <!-- 우측 여백 밸런스용 빈 공간 -->
+        <div style="width: 40px;"></div>
+    </header>
+
+    <!-- 메인 컨텐츠 영역 -->
+    <div class="main-container">
+        <div class="card">
+            <h1>👋 Welcome!</h1>
+            <p>2026 제2회 거시기 연말 시상식 메인 페이지입니다.</p>
+        </div>
     </div>
-    <!-- 카드 모양 상자 영역 끝 -->
+
+    <!-- 하단 고정 이미지 버튼 -->
+    <a href="#" class="fixed-bottom-btn">
+        <img src="https://via.placeholder.com/300x80/d63384/ffffff?text=Button" alt="하단 고정 버튼">
+    </a>
+
 </body>
 </html>
