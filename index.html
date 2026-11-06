@@ -250,6 +250,7 @@
         }
 
         .slide-card {
+            position: relative; /* 📌 우측 하단 스티커 배치를 위한 위치 기준 */
             display: none;
             flex-direction: column;
             align-items: center;
@@ -265,6 +266,7 @@
             box-sizing: border-box;
             margin: 0 16px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            overflow: visible; /* 📌 스티커가 박스 밖으로 나오도록 오버플로우 허용 */
         }
 
         .slide-card.active {
@@ -306,6 +308,19 @@
             font-weight: 800;
             color: #1a1a1a;
             padding: 50px 10px;
+        }
+
+        /* 📍 우측 하단 보조 이미지(스티커) 스타일 */
+        .card-badge {
+            position: absolute;
+            right: -25px;   /* PC: 박스 밖으로 살짝 돌출 */
+            bottom: -25px;
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            z-index: 15;
+            pointer-events: none;
+            filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.25));
         }
 
         .slide-dots {
@@ -443,6 +458,14 @@
             .slide-sub-caption {
                 font-size: 0.82rem;
             }
+
+            /* 📱 모바일: 박스 내부 우측 하단에 자연스럽게 겹침 */
+            .card-badge {
+                right: 10px;
+                bottom: 10px;
+                width: 55px;
+                height: 55px;
+            }
         }
     </style>
 </head>
@@ -535,7 +558,7 @@
             </div>
         </section>
 
-        <!-- PAGE 3: 2024년 제1회 거시기 연말 시상식 수상작 -->
+        <!-- PAGE 3: 2024년 제1회 거시기 연말 시상식 수상작 (우측 하단 아이콘 이미지 추가) -->
         <section class="section">
             <div class="page3-container">
                 <div class="page3-title">2024년 제1회 거시기 연말 시상식 수상작</div>
@@ -543,34 +566,39 @@
                 <div class="slider-wrapper">
                     <button class="arrow-btn" onclick="prevAwardSlide()">◀</button>
 
-                    <!-- 1번 작품 -->
+                    <!-- 1번 작품 (1.png) -->
                     <div class="slide-card active">
                         <img src="251.png" alt="작품 1" class="slide-img" onclick="openImageModal(this.src)">
                         <div class="slide-caption">2024 올해의 사진상 : 김우진</div>
+                        <img src="1.png" alt="1번 아이콘" class="card-badge">
                     </div>
 
-                    <!-- 2번 작품 -->
+                    <!-- 2번 작품 (2.gif) -->
                     <div class="slide-card">
                         <img src="c4.png" alt="작품 2" class="slide-img" onclick="openImageModal(this.src)">
                         <div class="slide-caption">2024 최고의 플레이상 : 이지환</div>
                         <div class="slide-sub-caption">용량 문제로 4컷 만화로 대체되었습니다.</div>
+                        <img src="2.gif" alt="2번 아이콘" class="card-badge">
                     </div>
 
-                    <!-- 3번 작품 -->
+                    <!-- 3번 작품 (3.png) -->
                     <div class="slide-card">
                         <img src="dh.png" alt="작품 3" class="slide-img" onclick="openImageModal(this.src)">
                         <div class="slide-caption">2024 최고 병약상 : 김동현</div>
+                        <img src="3.png" alt="3번 아이콘" class="card-badge">
                     </div>
 
-                    <!-- 4번 작품 -->
+                    <!-- 4번 작품 (4.png) -->
                     <div class="slide-card">
                         <img src="mg.png" alt="작품 4" class="slide-img" onclick="openImageModal(this.src)">
                         <div class="slide-caption">2024 올해의 인물상 : 방기훈</div>
+                        <img src="4.png" alt="4번 아이콘" class="card-badge">
                     </div>
 
-                    <!-- 5번 작품 -->
+                    <!-- 5번 작품 (5.png) -->
                     <div class="slide-card text-only">
                         <div class="slide-caption">2024 오늘의 미모상 : 기도현</div>
+                        <img src="5.png" alt="5번 아이콘" class="card-badge">
                     </div>
 
                     <button class="arrow-btn" onclick="nextAwardSlide()">▶</button>
@@ -638,7 +666,7 @@
             }, 700);
         }, { passive: true });
 
-        // 📱 스마트 터치 스크롤 제어 (2페이지 스마트 감지 적용)
+        // 📱 스마트 터치 스크롤 제어
         let startY = 0;
         window.addEventListener('touchstart', (e) => {
             startY = e.touches[0].clientY;
@@ -649,15 +677,13 @@
             const endY = e.changedTouches[0].clientY;
             const diffY = startY - endY;
 
-            // PAGE 2에 있을 때 스크롤 스마트 처리
             if (currentIdx === 1) {
                 const awardsBox = document.getElementById('awardsContainer');
                 const isAtTop = awardsBox.scrollTop <= 0;
                 const isAtBottom = Math.ceil(awardsBox.scrollTop + awardsBox.clientHeight) >= awardsBox.scrollHeight;
 
-                // 스크롤이 아직 진행 중일 때(중간에 위치)는 풀페이지 이동 취소
-                if (diffY > 0 && !isAtBottom) return; // 아래로 더 내리는 중
-                if (diffY < 0 && !isAtTop) return;    // 위로 올리는 중
+                if (diffY > 0 && !isAtBottom) return;
+                if (diffY < 0 && !isAtTop) return;
             }
 
             if (Math.abs(diffY) > 50) {
@@ -681,7 +707,6 @@
                 }, 700);
             }
         });
-
 
         // --- 🎨 PAGE 3 수상작 슬라이더 제어 (무한 순환) ---
         let currentAwardIdx = 0;
