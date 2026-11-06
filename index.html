@@ -109,19 +109,45 @@
             padding: 20px;
         }
 
-        /* 🎨 PAGE 1 전용 배경 (45도 사선 그라데이션) */
+        /* 🎨 PAGE 1 전용 배경 (왼쪽 위 #c1b6b6 -> 오른쪽 아래 #9c9191 사선 그라데이션) */
         .section:nth-child(1) {
-            background: linear-gradient(135deg, #423d3d, #312c2c);
+            background: linear-gradient(135deg, #c1b6b6, #9c9191);
         }
 
-        /* 🖼️ 페이지 1 반응형 메인 이미지 스타일 */
+        /* 🖼️ 이미지 + 텍스트 오버레이 컨테이너 */
+        .image-container {
+            position: relative;
+            display: inline-block;
+            max-width: 80%;
+            max-height: 70vh;
+        }
+
         .page1-image {
-            max-width: 80%;        /* PC 화면 기준 최대 가로 폭 */
-            max-height: 70vh;      /* 위아래 가려지지 않게 세로 비율 제한 */
+            max-width: 100%;
+            max-height: 70vh;
             width: auto;
             height: auto;
             object-fit: contain;
             display: block;
+        }
+
+        /* ✍️ 이미지 중앙 위에 들어가는 초대 문구 스타일 */
+        .image-overlay-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            color: #8f2222;
+            text-align: center;
+            line-height: 1.6;
+            font-size: 1.2rem;
+            word-break: keep-all;
+            pointer-events: none;
+        }
+
+        .image-overlay-text b {
+            font-weight: 800;
         }
 
         /* 📱 모바일 화면 대응 */
@@ -143,8 +169,12 @@
             .indicator {
                 left: 12px;
             }
-            .page1-image {
-                max-width: 90%;    /* 모바일에서는 가로 꽉 차게 조절 */
+            .image-container {
+                max-width: 92%;
+            }
+            .image-overlay-text {
+                font-size: 0.95rem;
+                line-height: 1.5;
             }
         }
     </style>
@@ -172,9 +202,15 @@
 
     <!-- 📜 메인 4개 섹션 영역 -->
     <div class="fullpage-container" id="mainContainer">
-        <!-- PAGE 1: 45도 사선 그라데이션 배경 적용 -->
+        <!-- PAGE 1: 그라데이션 배경 + 중앙 이미지 위 텍스트 오버레이 -->
         <section class="section">
-            <img src="page1.png" alt="2026 거시기 시상식 메인 로고" class="page1-image">
+            <div class="image-container">
+                <img src="page1_1.png" alt="2026 거시기 시상식 메인 로고" class="page1-image">
+                <div class="image-overlay-text">
+                    초대합니다<br>
+                    귀하를 <b>'제 2회 거시기 연말 시상식'</b> 후보로 모시게 되었습니다
+                </div>
+            </div>
         </section>
         
         <section class="section">
