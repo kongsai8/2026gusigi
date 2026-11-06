@@ -498,10 +498,27 @@
             margin-top: 2px;
         }
 
-        /* 🔴 하단 대형 검붉은색 참가지원폼 작성 버튼 스타일 */
+        /* 🔴 하단 버튼 + 양옆 GIF 아이콘 레이아웃 컨테이너 */
+        .big-btn-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            margin-top: 6px;
+        }
+
+        .btn-side-gif {
+            width: 65px;
+            height: 65px;
+            object-fit: contain;
+            flex-shrink: 0;
+            filter: drop-shadow(0px 3px 6px rgba(0,0,0,0.15));
+        }
+
         .big-apply-btn {
             display: block;
-            width: 100%;
+            flex-grow: 1;
             background-color: #8f2222;
             color: #ffffff;
             font-size: 1.15rem;
@@ -511,8 +528,7 @@
             text-decoration: none;
             box-sizing: border-box;
             box-shadow: 0 6px 18px rgba(143, 34, 34, 0.35);
-            transition: all 0.25 ease;
-            margin-top: 6px;
+            transition: all 0.25s ease;
             letter-spacing: -0.3px;
         }
 
@@ -683,9 +699,18 @@
             .page5-closing {
                 font-size: 0.85rem;
             }
+
+            /* 모바일 하단 버튼 및 gif 아이콘 크기 조정 */
+            .big-btn-wrapper {
+                gap: 8px;
+            }
+            .btn-side-gif {
+                width: 45px;
+                height: 45px;
+            }
             .big-apply-btn {
-                font-size: 1rem;
-                padding: 14px 16px;
+                font-size: 0.95rem;
+                padding: 12px 14px;
             }
         }
     </style>
@@ -850,7 +875,7 @@
             </div>
         </section>
 
-        <!-- PAGE 5: 세부 행사 일정 + 초대의 글 + 하단 대형 참가지원폼 작성 버튼 -->
+        <!-- PAGE 5: 세부 행사 일정 + 양옆 GIF가 달린 참가지원폼 작성 버튼 -->
         <section class="section">
             <div class="page5-container" id="page5Container">
                 <div class="page5-card">
@@ -865,7 +890,7 @@
                         </div>
                         <div class="meta-item">
                             <span class="meta-label">준비물</span>
-                            <span class="meta-value">가치 있는 애장품</span>
+                            <span class="meta-value">상품으로서 가치 있는 애장품</span>
                         </div>
                     </div>
                 </div>
@@ -890,10 +915,14 @@
                     축하와 기쁨의 순간을 나누어 주시면 감사하겠습니다.
                 </div>
 
-                <!-- 🔴 맨 아래 커다란 참가지원폼 작성 버튼 추가 -->
-                <a href="https://naver.me/50BUiNQu" target="_blank" rel="noopener noreferrer" class="big-apply-btn">
-                    참가지원폼 작성하기
-                </a>
+                <!-- 🔴 [55.gif] + [버튼] + [44.gif] 좌우 배치 -->
+                <div class="big-btn-wrapper">
+                    <img src="55.gif" alt="55 gif" class="btn-side-gif">
+                    <a href="https://naver.me/50BUiNQu" target="_blank" rel="noopener noreferrer" class="big-apply-btn">
+                        참가지원폼 작성하기
+                    </a>
+                    <img src="44.gif" alt="44 gif" class="btn-side-gif">
+                </div>
             </div>
         </section>
     </div>
