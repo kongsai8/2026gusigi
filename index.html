@@ -58,7 +58,7 @@
             z-index: 2000;
         }
 
-        /* 🔴 좌측 인디케이터 */
+        /* 🔴 좌측 인디케이터 (5개로 확충) */
         .indicator {
             position: fixed;
             left: 20px;
@@ -109,10 +109,12 @@
             padding: 20px;
         }
 
-        /* 🎨 PAGE 1, PAGE 2, PAGE 3 공통 가로 그라데이션 배경 */
+        /* 🎨 PAGE 1 ~ PAGE 5 전체 가로 그라데이션 배경 통일 */
         .section:nth-child(1),
         .section:nth-child(2),
-        .section:nth-child(3) {
+        .section:nth-child(3),
+        .section:nth-child(4),
+        .section:nth-child(5) {
             background: linear-gradient(to right, #9c9191, #c1b6b6, #9c9191);
         }
 
@@ -250,7 +252,7 @@
         }
 
         .slide-card {
-            position: relative; /* 📌 우측 하단 스티커 배치를 위한 위치 기준 */
+            position: relative;
             display: none;
             flex-direction: column;
             align-items: center;
@@ -266,7 +268,7 @@
             box-sizing: border-box;
             margin: 0 16px;
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-            overflow: visible; /* 📌 스티커가 박스 밖으로 나오도록 오버플로우 허용 */
+            overflow: visible;
         }
 
         .slide-card.active {
@@ -310,17 +312,30 @@
             padding: 50px 10px;
         }
 
-        /* 📍 우측 하단 보조 이미지(스티커) 스타일 */
-        .card-badge {
+        /* 📍 우측/좌측 하단 3배 확대 스티커 스타일 */
+        .card-badge-right {
             position: absolute;
-            right: -25px;   /* PC: 박스 밖으로 살짝 돌출 */
-            bottom: -25px;
-            width: 80px;
-            height: 80px;
+            right: -60px;
+            bottom: -60px;
+            width: 240px;
+            height: 240px;
             object-fit: contain;
             z-index: 15;
             pointer-events: none;
-            filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.25));
+            filter: drop-shadow(0px 6px 12px rgba(0,0,0,0.25));
+        }
+
+        .card-badge-left {
+            position: absolute;
+            left: -60px;
+            bottom: -60px;
+            width: 240px;
+            height: 240px;
+            object-fit: contain;
+            z-index: 15;
+            pointer-events: none;
+            transform: scaleX(-1);
+            filter: drop-shadow(0px 6px 12px rgba(0,0,0,0.25));
         }
 
         .slide-dots {
@@ -335,417 +350,4 @@
             background: rgba(40, 40, 40, 0.3);
             border-radius: 50%;
             cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .slide-dot-item.active {
-            background: #282828;
-            transform: scale(1.4);
-        }
-
-        .image-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
-            z-index: 3000;
-            justify-content: center;
-            align-items: center;
-            cursor: zoom-out;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .image-modal.show {
-            display: flex;
-            opacity: 1;
-        }
-
-        .image-modal img {
-            max-width: 90vw;
-            max-height: 90vh;
-            border-radius: 8px;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
-            object-fit: contain;
-        }
-
-        .modal-close-btn {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            color: #ffffff;
-            font-size: 2.5rem;
-            font-weight: bold;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        /* 📱 모바일 화면 대응 */
-        @media (max-width: 600px) {
-            .top-left-nav {
-                top: 15px;
-                left: 12px;
-                gap: 8px;
-            }
-            .nav-btn {
-                font-size: 0.75rem;
-                padding: 6px 10px;
-            }
-            .top-right-title {
-                top: 20px;
-                right: 12px;
-                font-size: 0.85rem;
-            }
-            .indicator {
-                left: 12px;
-            }
-            .page1-image {
-                max-width: 90%;
-            }
-            .page1-notice {
-                font-size: 0.72rem;
-            }
-            .awards-title, .page3-title {
-                font-size: 1.3rem;
-                margin-bottom: 12px;
-            }
-            .awards-grid {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-            .award-card {
-                padding: 10px 14px;
-            }
-            .award-name {
-                font-size: 0.88rem;
-            }
-            .award-desc {
-                font-size: 0.78rem;
-            }
-            .awards-notice {
-                font-size: 0.72rem;
-                margin-top: 14px;
-            }
-
-            .page3-container {
-                width: 98%;
-            }
-            .slide-card {
-                width: 88%;
-                padding: 16px;
-                margin: 0 4px;
-                min-height: 280px;
-            }
-            .slide-img {
-                max-height: 42vh;
-            }
-            .slide-card.text-only .slide-caption {
-                font-size: 1.3rem;
-                padding: 30px 5px;
-            }
-            .arrow-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.1rem;
-            }
-            .slide-caption {
-                font-size: 1.05rem;
-            }
-            .slide-sub-caption {
-                font-size: 0.82rem;
-            }
-
-            /* 📱 모바일: 박스 내부 우측 하단에 자연스럽게 겹침 */
-            .card-badge {
-                right: 10px;
-                bottom: 10px;
-                width: 55px;
-                height: 55px;
-            }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- 📍 좌측 상단 버튼 -->
-    <div class="top-left-nav">
-        <a href="#apply" class="nav-btn">참가지원서작성</a>
-        <a href="#vote" class="nav-btn">투표참여</a>
-    </div>
-
-    <!-- 📍 우측 상단 타이틀 -->
-    <div class="top-right-title">
-        2026 제2회 거시기 연말 시상식
-    </div>
-
-    <!-- 🔴 좌측 인디케이터 (세로 점 4개) -->
-    <div class="indicator">
-        <div class="dot active" onclick="scrollToSection(0)"></div>
-        <div class="dot" onclick="scrollToSection(1)"></div>
-        <div class="dot" onclick="scrollToSection(2)"></div>
-        <div class="dot" onclick="scrollToSection(3)"></div>
-    </div>
-
-    <!-- 🔍 사진 원본 크게보기 팝업 모달 -->
-    <div class="image-modal" id="imageModal" onclick="closeImageModal()">
-        <span class="modal-close-btn">&times;</span>
-        <img id="modalImg" src="" alt="확대된 작품 사진">
-    </div>
-
-    <!-- 📜 메인 4개 섹션 영역 -->
-    <div class="fullpage-container" id="mainContainer">
-        <!-- PAGE 1: 배경 + page1_2.png 이미지 + 하단 문구 -->
-        <section class="section">
-            <div class="page1-container">
-                <img src="page1_2.png" alt="2026 거시기 시상식 메인 로고" class="page1-image">
-                <div class="page1-notice">
-                    본 초대장은 PC에서 보아야 예쁘다 너도 그렇다
-                </div>
-            </div>
-        </section>
-        
-        <!-- PAGE 2: 수상 부문 영역 -->
-        <section class="section">
-            <div class="awards-container" id="awardsContainer">
-                <div class="awards-title">수상 부문</div>
-                
-                <div class="awards-grid">
-                    <div class="award-card">
-                        <span class="award-name">베스트 사진상</span>
-                        <span class="award-desc">다음 시상식을 장식할 올해 최고의 베스트컷</span>
-                    </div>
-                    <div class="award-card">
-                        <span class="award-name">베스트 플레이상</span>
-                        <span class="award-desc">올해 최고의 슈퍼플레이(게임)</span>
-                    </div>
-                    <div class="award-card">
-                        <span class="award-name">베스트 장기자랑상</span>
-                        <span class="award-desc">최고의 장기(臟器가능)자랑</span>
-                    </div>
-                    <div class="award-card">
-                        <span class="award-name">베스트 드레서</span>
-                        <span class="award-desc">오늘의 최고 착장 (드레스코드 추후 공지)</span>
-                    </div>
-                    <div class="award-card">
-                        <span class="award-name">베스트 병약상</span>
-                        <span class="award-desc">올해 최악의 건강검진</span>
-                    </div>
-                    <div class="award-card">
-                        <span class="award-name">베스트 축하상</span>
-                        <span class="award-desc">올해 최고의 축하받을일</span>
-                    </div>
-                    <div class="award-card">
-                        <span class="award-name">베스트 잼얘상</span>
-                        <span class="award-desc">올해 최고의 에피소드</span>
-                    </div>
-                    <div class="award-card">
-                        <span class="award-name">베스트 칭찬상(추천인)</span>
-                        <span class="award-desc">가장 칭찬하는 인물 추천</span>
-                    </div>
-                    <div class="award-card">
-                        <span class="award-name">와일드카드 특별상(추천인)</span>
-                        <span class="award-desc">위에 없는 새로운 상을 만들어서 추천</span>
-                    </div>
-                </div>
-
-                <div class="awards-notice">
-                    ※ 상기 시상 부문은 출품작 접수 및 현장 진행 상황에 따라 추가되거나 조정될 수 있습니다.
-                </div>
-            </div>
-        </section>
-
-        <!-- PAGE 3: 2024년 제1회 거시기 연말 시상식 수상작 (우측 하단 아이콘 이미지 추가) -->
-        <section class="section">
-            <div class="page3-container">
-                <div class="page3-title">2024년 제1회 거시기 연말 시상식 수상작</div>
-
-                <div class="slider-wrapper">
-                    <button class="arrow-btn" onclick="prevAwardSlide()">◀</button>
-
-                    <!-- 1번 작품 (1.png) -->
-                    <div class="slide-card active">
-                        <img src="251.png" alt="작품 1" class="slide-img" onclick="openImageModal(this.src)">
-                        <div class="slide-caption">2024 올해의 사진상 : 김우진</div>
-                        <img src="1.png" alt="1번 아이콘" class="card-badge">
-                    </div>
-
-                    <!-- 2번 작품 (2.gif) -->
-                    <div class="slide-card">
-                        <img src="c4.png" alt="작품 2" class="slide-img" onclick="openImageModal(this.src)">
-                        <div class="slide-caption">2024 최고의 플레이상 : 이지환</div>
-                        <div class="slide-sub-caption">용량 문제로 4컷 만화로 대체되었습니다.</div>
-                        <img src="2.gif" alt="2번 아이콘" class="card-badge">
-                    </div>
-
-                    <!-- 3번 작품 (3.png) -->
-                    <div class="slide-card">
-                        <img src="dh.png" alt="작품 3" class="slide-img" onclick="openImageModal(this.src)">
-                        <div class="slide-caption">2024 최고 병약상 : 김동현</div>
-                        <img src="3.png" alt="3번 아이콘" class="card-badge">
-                    </div>
-
-                    <!-- 4번 작품 (4.png) -->
-                    <div class="slide-card">
-                        <img src="mg.png" alt="작품 4" class="slide-img" onclick="openImageModal(this.src)">
-                        <div class="slide-caption">2024 올해의 인물상 : 방기훈</div>
-                        <img src="4.png" alt="4번 아이콘" class="card-badge">
-                    </div>
-
-                    <!-- 5번 작품 (5.png) -->
-                    <div class="slide-card text-only">
-                        <div class="slide-caption">2024 오늘의 미모상 : 기도현</div>
-                        <img src="5.png" alt="5번 아이콘" class="card-badge">
-                    </div>
-
-                    <button class="arrow-btn" onclick="nextAwardSlide()">▶</button>
-                </div>
-
-                <!-- 하단 동그라미 인디케이터 -->
-                <div class="slide-dots">
-                    <div class="slide-dot-item active" onclick="setAwardSlide(0)"></div>
-                    <div class="slide-dot-item" onclick="setAwardSlide(1)"></div>
-                    <div class="slide-dot-item" onclick="setAwardSlide(2)"></div>
-                    <div class="slide-dot-item" onclick="setAwardSlide(3)"></div>
-                    <div class="slide-dot-item" onclick="setAwardSlide(4)"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <h1>PAGE 4</h1>
-        </section>
-    </div>
-
-    <script>
-        // --- 📜 풀페이지 스크롤 제어 ---
-        let currentIdx = 0;
-        const totalSections = 4;
-        let isScrolling = false;
-        const container = document.getElementById('mainContainer');
-        const dots = document.querySelectorAll('.indicator .dot');
-
-        function scrollToSection(index) {
-            currentIdx = index;
-            container.style.transform = `translateY(-${currentIdx * 100}vh)`;
-
-            dots.forEach((dot, idx) => {
-                if (idx === currentIdx) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
-        }
-
-        scrollToSection(0);
-
-        window.addEventListener('wheel', (e) => {
-            if (isScrolling) return;
-            isScrolling = true;
-
-            if (e.deltaY > 0) {
-                if (currentIdx === totalSections - 1) {
-                    scrollToSection(0);
-                } else {
-                    scrollToSection(currentIdx + 1);
-                }
-            } else {
-                if (currentIdx === 0) {
-                    scrollToSection(totalSections - 1);
-                } else {
-                    scrollToSection(currentIdx - 1);
-                }
-            }
-
-            setTimeout(() => {
-                isScrolling = false;
-            }, 700);
-        }, { passive: true });
-
-        // 📱 스마트 터치 스크롤 제어
-        let startY = 0;
-        window.addEventListener('touchstart', (e) => {
-            startY = e.touches[0].clientY;
-        });
-
-        window.addEventListener('touchend', (e) => {
-            if (isScrolling) return;
-            const endY = e.changedTouches[0].clientY;
-            const diffY = startY - endY;
-
-            if (currentIdx === 1) {
-                const awardsBox = document.getElementById('awardsContainer');
-                const isAtTop = awardsBox.scrollTop <= 0;
-                const isAtBottom = Math.ceil(awardsBox.scrollTop + awardsBox.clientHeight) >= awardsBox.scrollHeight;
-
-                if (diffY > 0 && !isAtBottom) return;
-                if (diffY < 0 && !isAtTop) return;
-            }
-
-            if (Math.abs(diffY) > 50) {
-                isScrolling = true;
-                if (diffY > 0) {
-                    if (currentIdx === totalSections - 1) {
-                        scrollToSection(0);
-                    } else {
-                        scrollToSection(currentIdx + 1);
-                    }
-                } else {
-                    if (currentIdx === 0) {
-                        scrollToSection(totalSections - 1);
-                    } else {
-                        scrollToSection(currentIdx - 1);
-                    }
-                }
-
-                setTimeout(() => {
-                    isScrolling = false;
-                }, 700);
-            }
-        });
-
-        // --- 🎨 PAGE 3 수상작 슬라이더 제어 (무한 순환) ---
-        let currentAwardIdx = 0;
-        const awardCards = document.querySelectorAll('.slide-card');
-        const awardDots = document.querySelectorAll('.slide-dot-item');
-        const totalAwardSlides = awardCards.length;
-
-        function setAwardSlide(index) {
-            awardCards[currentAwardIdx].classList.remove('active');
-            awardDots[currentAwardIdx].classList.remove('active');
-
-            currentAwardIdx = index;
-
-            awardCards[currentAwardIdx].classList.add('active');
-            awardDots[currentAwardIdx].classList.add('active');
-        }
-
-        function nextAwardSlide() {
-            let nextIdx = (currentAwardIdx + 1) % totalAwardSlides;
-            setAwardSlide(nextIdx);
-        }
-
-        function prevAwardSlide() {
-            let prevIdx = (currentAwardIdx - 1 + totalAwardSlides) % totalAwardSlides;
-            setAwardSlide(prevIdx);
-        }
-
-        // --- 🔍 사진 확대 라이트박스 모달 제어 ---
-        const imageModal = document.getElementById('imageModal');
-        const modalImg = document.getElementById('modalImg');
-
-        function openImageModal(imgSrc) {
-            modalImg.src = imgSrc;
-            imageModal.classList.add('show');
-        }
-
-        function closeImageModal() {
-            imageModal.classList.remove('show');
-        }
-    </script>
-</body>
-</html>
+            transition
