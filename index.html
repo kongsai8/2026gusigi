@@ -149,6 +149,7 @@
             color: #282828;
             padding: 10px;
             box-sizing: border-box;
+            -webkit-overflow-scrolling: touch;
         }
 
         .awards-title {
@@ -199,7 +200,7 @@
             word-break: keep-all;
         }
 
-        /* 🎨 PAGE 3 2024 수상작 슬라이더 레이아웃 (크기 확대 개편) */
+        /* 🎨 PAGE 3 2024 수상작 슬라이더 레이아웃 */
         .page3-container {
             display: flex;
             flex-direction: column;
@@ -276,6 +277,12 @@
             border-radius: 10px;
             object-fit: contain;
             margin-bottom: 16px;
+            cursor: zoom-in;
+            transition: transform 0.2s ease;
+        }
+
+        .slide-img:hover {
+            transform: scale(1.02);
         }
 
         .slide-caption {
@@ -294,7 +301,6 @@
             font-weight: 600;
         }
 
-        /* 📸 이미지 없는 카드(5번) 전용 텍스트 스타일 */
         .slide-card.text-only .slide-caption {
             font-size: 1.7rem;
             font-weight: 800;
@@ -322,7 +328,48 @@
             transform: scale(1.4);
         }
 
-        /* 📱 모바일 화면 대응 (글자 및 영역 확대) */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .image-modal img {
+            max-width: 90vw;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+            object-fit: contain;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: #ffffff;
+            font-size: 2.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* 📱 모바일 화면 대응 */
         @media (max-width: 600px) {
             .top-left-nav {
                 top: 15px;
@@ -369,7 +416,6 @@
                 margin-top: 14px;
             }
 
-            /* PAGE 3 모바일 대응 */
             .page3-container {
                 width: 98%;
             }
@@ -421,6 +467,12 @@
         <div class="dot" onclick="scrollToSection(3)"></div>
     </div>
 
+    <!-- 🔍 사진 원본 크게보기 팝업 모달 -->
+    <div class="image-modal" id="imageModal" onclick="closeImageModal()">
+        <span class="modal-close-btn">&times;</span>
+        <img id="modalImg" src="" alt="확대된 작품 사진">
+    </div>
+
     <!-- 📜 메인 4개 섹션 영역 -->
     <div class="fullpage-container" id="mainContainer">
         <!-- PAGE 1: 배경 + page1_2.png 이미지 + 하단 문구 -->
@@ -435,7 +487,7 @@
         
         <!-- PAGE 2: 수상 부문 영역 -->
         <section class="section">
-            <div class="awards-container">
+            <div class="awards-container" id="awardsContainer">
                 <div class="awards-title">수상 부문</div>
                 
                 <div class="awards-grid">
@@ -483,7 +535,7 @@
             </div>
         </section>
 
-        <!-- PAGE 3: 2024년 제1회 거시기 연말 시상식 수상작 (확대 적용) -->
+        <!-- PAGE 3: 2024년 제1회 거시기 연말 시상식 수상작 -->
         <section class="section">
             <div class="page3-container">
                 <div class="page3-title">2024년 제1회 거시기 연말 시상식 수상작</div>
@@ -493,26 +545,26 @@
 
                     <!-- 1번 작품 -->
                     <div class="slide-card active">
-                        <img src="251.png" alt="작품 1" class="slide-img">
+                        <img src="251.png" alt="작품 1" class="slide-img" onclick="openImageModal(this.src)">
                         <div class="slide-caption">2024 올해의 사진상 : 김우진</div>
                     </div>
 
                     <!-- 2번 작품 -->
                     <div class="slide-card">
-                        <img src="c4.png" alt="작품 2" class="slide-img">
+                        <img src="c4.png" alt="작품 2" class="slide-img" onclick="openImageModal(this.src)">
                         <div class="slide-caption">2024 최고의 플레이상 : 이지환</div>
                         <div class="slide-sub-caption">용량 문제로 4컷 만화로 대체되었습니다.</div>
                     </div>
 
                     <!-- 3번 작품 -->
                     <div class="slide-card">
-                        <img src="dh.png" alt="작품 3" class="slide-img">
+                        <img src="dh.png" alt="작품 3" class="slide-img" onclick="openImageModal(this.src)">
                         <div class="slide-caption">2024 최고 병약상 : 김동현</div>
                     </div>
 
                     <!-- 4번 작품 -->
                     <div class="slide-card">
-                        <img src="mg.png" alt="작품 4" class="slide-img">
+                        <img src="mg.png" alt="작품 4" class="slide-img" onclick="openImageModal(this.src)">
                         <div class="slide-caption">2024 올해의 인물상 : 방기훈</div>
                     </div>
 
@@ -586,6 +638,7 @@
             }, 700);
         }, { passive: true });
 
+        // 📱 스마트 터치 스크롤 제어 (2페이지 스마트 감지 적용)
         let startY = 0;
         window.addEventListener('touchstart', (e) => {
             startY = e.touches[0].clientY;
@@ -595,6 +648,17 @@
             if (isScrolling) return;
             const endY = e.changedTouches[0].clientY;
             const diffY = startY - endY;
+
+            // PAGE 2에 있을 때 스크롤 스마트 처리
+            if (currentIdx === 1) {
+                const awardsBox = document.getElementById('awardsContainer');
+                const isAtTop = awardsBox.scrollTop <= 0;
+                const isAtBottom = Math.ceil(awardsBox.scrollTop + awardsBox.clientHeight) >= awardsBox.scrollHeight;
+
+                // 스크롤이 아직 진행 중일 때(중간에 위치)는 풀페이지 이동 취소
+                if (diffY > 0 && !isAtBottom) return; // 아래로 더 내리는 중
+                if (diffY < 0 && !isAtTop) return;    // 위로 올리는 중
+            }
 
             if (Math.abs(diffY) > 50) {
                 isScrolling = true;
@@ -617,6 +681,7 @@
                 }, 700);
             }
         });
+
 
         // --- 🎨 PAGE 3 수상작 슬라이더 제어 (무한 순환) ---
         let currentAwardIdx = 0;
@@ -642,6 +707,19 @@
         function prevAwardSlide() {
             let prevIdx = (currentAwardIdx - 1 + totalAwardSlides) % totalAwardSlides;
             setAwardSlide(prevIdx);
+        }
+
+        // --- 🔍 사진 확대 라이트박스 모달 제어 ---
+        const imageModal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImg');
+
+        function openImageModal(imgSrc) {
+            modalImg.src = imgSrc;
+            imageModal.classList.add('show');
+        }
+
+        function closeImageModal() {
+            imageModal.classList.remove('show');
         }
     </script>
 </body>
