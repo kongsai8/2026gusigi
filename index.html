@@ -58,7 +58,7 @@
             z-index: 2000;
         }
 
-        /* 🔴 좌측 인디케이터 (5개로 확충) */
+        /* 🔴 좌측 인디케이터 */
         .indicator {
             position: fixed;
             left: 20px;
@@ -387,7 +387,7 @@
             text-transform: lowercase;
         }
 
-        /* ✉️ PAGE 5 전용 레이아웃 (세부 일정 및 안내) */
+        /* ✉️ PAGE 5 전용 레이아웃 */
         .page5-container {
             display: flex;
             flex-direction: column;
@@ -398,7 +398,7 @@
             max-height: 85vh;
             overflow-y: auto;
             color: #282828;
-            gap: 20px;
+            gap: 18px;
             box-sizing: border-box;
             padding: 10px;
         }
@@ -495,7 +495,31 @@
             line-height: 1.6;
             word-break: keep-all;
             text-align: center;
-            margin-top: 4px;
+            margin-top: 2px;
+        }
+
+        /* 🔴 하단 대형 검붉은색 참가지원폼 작성 버튼 스타일 */
+        .big-apply-btn {
+            display: block;
+            width: 100%;
+            background-color: #8f2222;
+            color: #ffffff;
+            font-size: 1.15rem;
+            font-weight: 800;
+            padding: 16px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            box-sizing: border-box;
+            box-shadow: 0 6px 18px rgba(143, 34, 34, 0.35);
+            transition: all 0.25 ease;
+            margin-top: 6px;
+            letter-spacing: -0.3px;
+        }
+
+        .big-apply-btn:hover {
+            background-color: #a62828;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(143, 34, 34, 0.5);
         }
 
         .image-modal {
@@ -631,10 +655,9 @@
                 font-size: 1.5rem;
             }
 
-            /* PAGE 5 모바일 대응 */
             .page5-container {
                 width: 95%;
-                gap: 14px;
+                gap: 12px;
             }
             .meta-info-grid {
                 grid-template-columns: 1fr;
@@ -660,6 +683,10 @@
             .page5-closing {
                 font-size: 0.85rem;
             }
+            .big-apply-btn {
+                font-size: 1rem;
+                padding: 14px 16px;
+            }
         }
     </style>
 </head>
@@ -667,7 +694,7 @@
 
     <!-- 📍 좌측 상단 버튼 -->
     <div class="top-left-nav">
-        <a href="#apply" class="nav-btn">참가지원폼작성</a>
+        <a href="https://naver.me/50BUiNQu" target="_blank" rel="noopener noreferrer" class="nav-btn">참가지원폼작성</a>
         <a href="#vote" class="nav-btn">단체티 투표</a>
     </div>
 
@@ -823,10 +850,9 @@
             </div>
         </section>
 
-        <!-- PAGE 5: 세부 행사 일정 및 초대 안내 -->
+        <!-- PAGE 5: 세부 행사 일정 + 초대의 글 + 하단 대형 참가지원폼 작성 버튼 -->
         <section class="section">
             <div class="page5-container" id="page5Container">
-                <!-- 메인 정보 카드 -->
                 <div class="page5-card">
                     <div class="meta-info-grid">
                         <div class="meta-item">
@@ -839,12 +865,11 @@
                         </div>
                         <div class="meta-item">
                             <span class="meta-label">준비물</span>
-                            <span class="meta-value">상품으로서 가치 있는 애장품</span>
+                            <span class="meta-value">가치 있는 애장품</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- 행사 일정 카드 -->
                 <div class="page5-card schedule-box">
                     <div class="schedule-header">행사 일정</div>
                     <ul class="schedule-list">
@@ -860,11 +885,15 @@
                     </div>
                 </div>
 
-                <!-- 하단 초대의 글 -->
                 <div class="page5-closing">
                     귀한 걸음 하시어 뜻깊은 자리를 함께 채워주시고,<br>
                     축하와 기쁨의 순간을 나누어 주시면 감사하겠습니다.
                 </div>
+
+                <!-- 🔴 맨 아래 커다란 참가지원폼 작성 버튼 추가 -->
+                <a href="https://naver.me/50BUiNQu" target="_blank" rel="noopener noreferrer" class="big-apply-btn">
+                    참가지원폼 작성하기
+                </a>
             </div>
         </section>
     </div>
@@ -872,7 +901,7 @@
     <script>
         // --- 📜 풀페이지 스크롤 제어 ---
         let currentIdx = 0;
-        const totalSections = 5; // 📌 총 섹션 수 5개로 업데이트
+        const totalSections = 5;
         let isScrolling = false;
         const container = document.getElementById('mainContainer');
         const dots = document.querySelectorAll('.indicator .dot');
@@ -926,7 +955,6 @@
             const endY = e.changedTouches[0].clientY;
             const diffY = startY - endY;
 
-            // PAGE 2 스마트 스크롤 제어
             if (currentIdx === 1) {
                 const awardsBox = document.getElementById('awardsContainer');
                 const isAtTop = awardsBox.scrollTop <= 0;
@@ -936,7 +964,6 @@
                 if (diffY < 0 && !isAtTop) return;
             }
 
-            // PAGE 5 스마트 스크롤 제어
             if (currentIdx === 4) {
                 const page5Box = document.getElementById('page5Container');
                 const isAtTop = page5Box.scrollTop <= 0;
