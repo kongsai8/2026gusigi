@@ -312,7 +312,7 @@
             padding: 50px 10px;
         }
 
-        /* 📍 우측/좌측 하단 3배 확대 스티커 스타일 */
+        /* 📍 PC 기준 스티커 스타일 (기존 3배 대형 크기 유지) */
         .card-badge-right {
             position: absolute;
             right: -60px;
@@ -498,7 +498,6 @@
             margin-top: 2px;
         }
 
-        /* 🔴 하단 버튼 + 양옆 GIF 아이콘 레이아웃 컨테이너 */
         .big-btn-wrapper {
             display: flex;
             align-items: center;
@@ -579,7 +578,7 @@
             user-select: none;
         }
 
-        /* 📱 모바일 화면 대응 */
+        /* 📱 모바일 화면 대응 (스티커 가림 방지 최적화) */
         @media (max-width: 600px) {
             .top-left-nav {
                 top: 15px;
@@ -654,17 +653,18 @@
                 font-size: 0.82rem;
             }
 
+            /* 📱 모바일 전용 스티커 크기 및 위치 조정 (내용 안 가리도록 최적화) */
             .card-badge-right {
-                right: -15px;
-                bottom: -20px;
-                width: 160px;
-                height: 160px;
+                right: -30px;
+                bottom: -35px;
+                width: 100px;
+                height: 100px;
             }
             .card-badge-left {
-                left: -15px;
-                bottom: -20px;
-                width: 160px;
-                height: 160px;
+                left: -30px;
+                bottom: -35px;
+                width: 100px;
+                height: 100px;
             }
 
             .page4-content {
@@ -700,7 +700,6 @@
                 font-size: 0.85rem;
             }
 
-            /* 모바일 하단 버튼 및 gif 아이콘 크기 조정 */
             .big-btn-wrapper {
                 gap: 8px;
             }
@@ -875,7 +874,7 @@
             </div>
         </section>
 
-        <!-- PAGE 5: 세부 행사 일정 + 양옆 GIF가 달린 참가지원폼 작성 버튼 -->
+        <!-- PAGE 5: 세부 행사 일정 -->
         <section class="section">
             <div class="page5-container" id="page5Container">
                 <div class="page5-card">
@@ -890,7 +889,7 @@
                         </div>
                         <div class="meta-item">
                             <span class="meta-label">준비물</span>
-                            <span class="meta-value">상품으로서 가치 있는 애장품</span>
+                            <span class="meta-value">가치 있는 애장품</span>
                         </div>
                     </div>
                 </div>
@@ -915,7 +914,6 @@
                     축하와 기쁨의 순간을 나누어 주시면 감사하겠습니다.
                 </div>
 
-                <!-- 🔴 [55.gif] + [버튼] + [44.gif] 좌우 배치 -->
                 <div class="big-btn-wrapper">
                     <img src="55.gif" alt="55 gif" class="btn-side-gif">
                     <a href="https://naver.me/50BUiNQu" target="_blank" rel="noopener noreferrer" class="big-apply-btn">
