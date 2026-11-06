@@ -199,20 +199,20 @@
             word-break: keep-all;
         }
 
-        /* 🎨 PAGE 3 2024 수상작 슬라이더 레이아웃 */
+        /* 🎨 PAGE 3 2024 수상작 슬라이더 레이아웃 (크기 확대 개편) */
         .page3-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 90%;
-            max-width: 800px;
+            width: 95%;
+            max-width: 950px;
             color: #282828;
         }
 
         .page3-title {
             font-size: 1.6rem;
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             letter-spacing: -0.5px;
             color: #8f2222;
         }
@@ -226,12 +226,12 @@
         }
 
         .arrow-btn {
-            background: rgba(255, 255, 255, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             color: #282828;
-            font-size: 1.2rem;
-            width: 44px;
-            height: 44px;
+            font-size: 1.4rem;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             cursor: pointer;
             z-index: 10;
@@ -240,11 +240,12 @@
             align-items: center;
             justify-content: center;
             user-select: none;
+            flex-shrink: 0;
         }
 
         .arrow-btn:hover {
-            background: rgba(255, 255, 255, 0.8);
-            transform: scale(1.08);
+            background: rgba(255, 255, 255, 0.9);
+            transform: scale(1.1);
         }
 
         .slide-card {
@@ -252,16 +253,17 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(5px);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            width: 70%;
-            min-height: 250px;
-            max-width: 500px;
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(6px);
+            padding: 24px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            width: 85%;
+            max-width: 650px;
+            min-height: 380px;
             box-sizing: border-box;
             margin: 0 16px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
         }
 
         .slide-card.active {
@@ -270,44 +272,45 @@
 
         .slide-img {
             max-width: 100%;
-            max-height: 40vh;
-            border-radius: 8px;
+            max-height: 52vh;
+            border-radius: 10px;
             object-fit: contain;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
         .slide-caption {
-            font-size: 1rem;
-            font-weight: 700;
+            font-size: 1.25rem;
+            font-weight: 800;
             color: #1a1a1a;
             line-height: 1.4;
             word-break: keep-all;
         }
 
         .slide-sub-caption {
-            font-size: 0.78rem;
-            color: rgba(40, 40, 40, 0.75);
-            margin-top: 4px;
+            font-size: 0.92rem;
+            color: rgba(40, 40, 40, 0.85);
+            margin-top: 6px;
             word-break: keep-all;
+            font-weight: 600;
         }
 
         /* 📸 이미지 없는 카드(5번) 전용 텍스트 스타일 */
         .slide-card.text-only .slide-caption {
-            font-size: 1.45rem;
+            font-size: 1.7rem;
             font-weight: 800;
-            color: #8f2222;
-            padding: 40px 10px;
+            color: #1a1a1a;
+            padding: 50px 10px;
         }
 
         .slide-dots {
             display: flex;
-            gap: 8px;
-            margin-top: 16px;
+            gap: 10px;
+            margin-top: 20px;
         }
 
         .slide-dot-item {
-            width: 8px;
-            height: 8px;
+            width: 10px;
+            height: 10px;
             background: rgba(40, 40, 40, 0.3);
             border-radius: 50%;
             cursor: pointer;
@@ -316,10 +319,10 @@
 
         .slide-dot-item.active {
             background: #282828;
-            transform: scale(1.3);
+            transform: scale(1.4);
         }
 
-        /* 📱 모바일 화면 대응 */
+        /* 📱 모바일 화면 대응 (글자 및 영역 확대) */
         @media (max-width: 600px) {
             .top-left-nav {
                 top: 15px;
@@ -346,7 +349,7 @@
             }
             .awards-title, .page3-title {
                 font-size: 1.3rem;
-                margin-bottom: 16px;
+                margin-bottom: 12px;
             }
             .awards-grid {
                 grid-template-columns: 1fr;
@@ -365,26 +368,34 @@
                 font-size: 0.72rem;
                 margin-top: 14px;
             }
+
+            /* PAGE 3 모바일 대응 */
+            .page3-container {
+                width: 98%;
+            }
             .slide-card {
-                width: 82%;
-                padding: 14px;
-                margin: 0 8px;
-                min-height: 200px;
+                width: 88%;
+                padding: 16px;
+                margin: 0 4px;
+                min-height: 280px;
+            }
+            .slide-img {
+                max-height: 42vh;
             }
             .slide-card.text-only .slide-caption {
-                font-size: 1.15rem;
-                padding: 24px 5px;
+                font-size: 1.3rem;
+                padding: 30px 5px;
             }
             .arrow-btn {
-                width: 36px;
-                height: 36px;
-                font-size: 0.9rem;
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
             }
             .slide-caption {
-                font-size: 0.85rem;
+                font-size: 1.05rem;
             }
             .slide-sub-caption {
-                font-size: 0.72rem;
+                font-size: 0.82rem;
             }
         }
     </style>
@@ -425,7 +436,7 @@
         <!-- PAGE 2: 수상 부문 영역 -->
         <section class="section">
             <div class="awards-container">
-                <div class="awards-title">[수상 부문]</div>
+                <div class="awards-title">수상 부문</div>
                 
                 <div class="awards-grid">
                     <div class="award-card">
@@ -472,10 +483,10 @@
             </div>
         </section>
 
-        <!-- PAGE 3: 2024년 수상작 감상 슬라이더 -->
+        <!-- PAGE 3: 2024년 제1회 거시기 연말 시상식 수상작 (확대 적용) -->
         <section class="section">
             <div class="page3-container">
-                <div class="page3-title">2024년 수상작 감상</div>
+                <div class="page3-title">2024년 제1회 거시기 연말 시상식 수상작</div>
 
                 <div class="slider-wrapper">
                     <button class="arrow-btn" onclick="prevAwardSlide()">◀</button>
@@ -505,7 +516,7 @@
                         <div class="slide-caption">2024 올해의 인물상 : 방기훈</div>
                     </div>
 
-                    <!-- 5번 작품 (텍스트 전용 크고 강조된 텍스트) -->
+                    <!-- 5번 작품 -->
                     <div class="slide-card text-only">
                         <div class="slide-caption">2024 오늘의 미모상 : 기도현</div>
                     </div>
