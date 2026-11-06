@@ -156,7 +156,7 @@
             font-weight: 800;
             margin-bottom: 24px;
             letter-spacing: -0.5px;
-            color: #8f2222; /* 👈 8f2222 색상 변경 */
+            color: #8f2222;
         }
 
         .awards-grid {
@@ -199,7 +199,7 @@
             word-break: keep-all;
         }
 
-        /* 🎨 PAGE 3 2025 수상작 슬라이더 레이아웃 */
+        /* 🎨 PAGE 3 2024 수상작 슬라이더 레이아웃 */
         .page3-container {
             display: flex;
             flex-direction: column;
@@ -214,7 +214,7 @@
             font-weight: 800;
             margin-bottom: 20px;
             letter-spacing: -0.5px;
-            color: #8f2222; /* 👈 8f2222 색상 변경 */
+            color: #8f2222;
         }
 
         .slider-wrapper {
@@ -279,6 +279,13 @@
             font-weight: 700;
             color: #1a1a1a;
             line-height: 1.4;
+            word-break: keep-all;
+        }
+
+        .slide-sub-caption {
+            font-size: 0.78rem;
+            color: rgba(40, 40, 40, 0.75);
+            margin-top: 4px;
             word-break: keep-all;
         }
 
@@ -360,6 +367,9 @@
             }
             .slide-caption {
                 font-size: 0.85rem;
+            }
+            .slide-sub-caption {
+                font-size: 0.72rem;
             }
         }
     </style>
@@ -447,42 +457,43 @@
             </div>
         </section>
 
-        <!-- PAGE 3: 2025년 수상작 감상 슬라이더 -->
+        <!-- PAGE 3: 2024년 수상작 감상 슬라이더 -->
         <section class="section">
             <div class="page3-container">
-                <div class="page3-title">2025년 수상작 감상</div>
+                <div class="page3-title">2024년 수상작 감상</div>
 
                 <div class="slider-wrapper">
                     <button class="arrow-btn" onclick="prevAwardSlide()">◀</button>
 
-                    <!-- 1번 작품 (수정 완료) -->
+                    <!-- 1번 작품 -->
                     <div class="slide-card active">
                         <img src="251.png" alt="작품 1" class="slide-img">
-                        <div class="slide-caption">2025 올해의 사진상 : 김우진</div>
+                        <div class="slide-caption">2024 올해의 사진상 : 김우진</div>
                     </div>
 
-                    <!-- 2번 작품 -->
+                    <!-- 2번 작품 (수정 완료) -->
                     <div class="slide-card">
-                        <img src="award2.png" alt="작품 2" class="slide-img">
-                        <div class="slide-caption">2025 베스트 플레이상 - 작품 제목 2</div>
+                        <img src="c4.png" alt="작품 2" class="slide-img">
+                        <div class="slide-caption">2024 최고의 플레이상 : 이지환</div>
+                        <div class="slide-sub-caption">용량 문제로 4컷 만화로 대체되었습니다.</div>
                     </div>
 
                     <!-- 3번 작품 -->
                     <div class="slide-card">
                         <img src="award3.png" alt="작품 3" class="slide-img">
-                        <div class="slide-caption">2025 베스트 드레서 - 작품 제목 3</div>
+                        <div class="slide-caption">2024 베스트 드레서 - 작품 제목 3</div>
                     </div>
 
                     <!-- 4번 작품 -->
                     <div class="slide-card">
                         <img src="award4.png" alt="작품 4" class="slide-img">
-                        <div class="slide-caption">2025 베스트 잼얘상 - 작품 제목 4</div>
+                        <div class="slide-caption">2024 베스트 잼얘상 - 작품 제목 4</div>
                     </div>
 
                     <!-- 5번 작품 -->
                     <div class="slide-card">
                         <img src="award5.png" alt="작품 5" class="slide-img">
-                        <div class="slide-caption">2025 특별상 - 작품 제목 5</div>
+                        <div class="slide-caption">2024 특별상 - 작품 제목 5</div>
                     </div>
 
                     <button class="arrow-btn" onclick="nextAwardSlide()">▶</button>
