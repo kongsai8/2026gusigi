@@ -116,14 +116,28 @@
             background: linear-gradient(to right, #9c9191, #c1b6b6, #9c9191);
         }
 
-        /* 🖼️ 페이지 1 반응형 메인 이미지 스타일 */
+        /* 🖼️ PAGE 1 이미지 + 하단 문구 컨테이너 */
+        .page1-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
         .page1-image {
             max-width: 80%;
-            max-height: 70vh;
+            max-height: 65vh;
             width: auto;
             height: auto;
             object-fit: contain;
             display: block;
+        }
+
+        .page1-notice {
+            font-size: 0.78rem;
+            color: rgba(40, 40, 40, 0.75);
+            line-height: 1.4;
+            word-break: keep-all;
         }
 
         /* 🏆 PAGE 2 수상 부문 컨테이너 */
@@ -142,6 +156,7 @@
             font-weight: 800;
             margin-bottom: 24px;
             letter-spacing: -0.5px;
+            color: #8f2222; /* 👈 8f2222 색상 변경 */
         }
 
         .awards-grid {
@@ -179,7 +194,7 @@
         .awards-notice {
             margin-top: 20px;
             font-size: 0.78rem;
-            opacity: 0.75;
+            color: rgba(40, 40, 40, 0.75);
             line-height: 1.4;
             word-break: keep-all;
         }
@@ -199,6 +214,7 @@
             font-weight: 800;
             margin-bottom: 20px;
             letter-spacing: -0.5px;
+            color: #8f2222; /* 👈 8f2222 색상 변경 */
         }
 
         .slider-wrapper {
@@ -308,6 +324,9 @@
             .page1-image {
                 max-width: 90%;
             }
+            .page1-notice {
+                font-size: 0.72rem;
+            }
             .awards-title, .page3-title {
                 font-size: 1.3rem;
                 margin-bottom: 16px;
@@ -368,9 +387,14 @@
 
     <!-- 📜 메인 4개 섹션 영역 -->
     <div class="fullpage-container" id="mainContainer">
-        <!-- PAGE 1: 가로 그라데이션 배경 + page1_2.png 이미지 배치 -->
+        <!-- PAGE 1: 배경 + page1_2.png 이미지 + 하단 문구 -->
         <section class="section">
-            <img src="page1_2.png" alt="2026 거시기 시상식 메인 로고" class="page1-image">
+            <div class="page1-container">
+                <img src="page1_2.png" alt="2026 거시기 시상식 메인 로고" class="page1-image">
+                <div class="page1-notice">
+                    본 초대장은 PC에서 보아야 예쁘다 너도 그렇다
+                </div>
+            </div>
         </section>
         
         <!-- PAGE 2: 수상 부문 영역 -->
@@ -431,10 +455,10 @@
                 <div class="slider-wrapper">
                     <button class="arrow-btn" onclick="prevAwardSlide()">◀</button>
 
-                    <!-- 1번 작품 -->
+                    <!-- 1번 작품 (수정 완료) -->
                     <div class="slide-card active">
-                        <img src="award1.png" alt="작품 1" class="slide-img">
-                        <div class="slide-caption">2025 베스트 사진상 - 작품 제목 1</div>
+                        <img src="251.png" alt="작품 1" class="slide-img">
+                        <div class="slide-caption">2025 올해의 사진상 : 김우진</div>
                     </div>
 
                     <!-- 2번 작품 -->
