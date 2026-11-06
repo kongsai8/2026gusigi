@@ -109,19 +109,78 @@
             padding: 20px;
         }
 
-        /* 🎨 PAGE 1 전용 배경 (가로 방향: #9c9191 -> #c1b6b6 -> #9c9191) */
-        .section:nth-child(1) {
+        /* 🎨 PAGE 1, PAGE 2 공통 가로 그라데이션 배경 */
+        .section:nth-child(1),
+        .section:nth-child(2) {
             background: linear-gradient(to right, #9c9191, #c1b6b6, #9c9191);
         }
 
         /* 🖼️ 페이지 1 반응형 메인 이미지 스타일 */
         .page1-image {
-            max-width: 80%;        /* PC 화면 기준 최대 가로 폭 */
-            max-height: 70vh;      /* 위아래 가려지지 않게 세로 비율 제한 */
+            max-width: 80%;
+            max-height: 70vh;
             width: auto;
             height: auto;
             object-fit: contain;
             display: block;
+        }
+
+        /* 🏆 PAGE 2 수상 부문 컨테이너 */
+        .awards-container {
+            max-width: 850px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            color: #282828;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .awards-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            text-align: left;
+        }
+
+        .award-card {
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(5px);
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .award-name {
+            font-weight: 800;
+            font-size: 0.95rem;
+            color: #1a1a1a;
+            letter-spacing: -0.3px;
+        }
+
+        .award-desc {
+            font-size: 0.82rem;
+            color: #4a4a4a;
+            line-height: 1.35;
+            word-break: keep-all;
+        }
+
+        .awards-notice {
+            margin-top: 20px;
+            font-size: 0.78rem;
+            opacity: 0.75;
+            line-height: 1.4;
+            word-break: keep-all;
         }
 
         /* 📱 모바일 화면 대응 */
@@ -144,7 +203,28 @@
                 left: 12px;
             }
             .page1-image {
-                max-width: 90%;    /* 모바일에서는 가로 꽉 차게 조절 */
+                max-width: 90%;
+            }
+            .awards-title {
+                font-size: 1.3rem;
+                margin-bottom: 16px;
+            }
+            .awards-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .award-card {
+                padding: 10px 14px;
+            }
+            .award-name {
+                font-size: 0.88rem;
+            }
+            .award-desc {
+                font-size: 0.78rem;
+            }
+            .awards-notice {
+                font-size: 0.72rem;
+                margin-top: 14px;
             }
         }
     </style>
@@ -177,9 +257,56 @@
             <img src="page1_2.png" alt="2026 거시기 시상식 메인 로고" class="page1-image">
         </section>
         
+        <!-- PAGE 2: 수상 부문 영역 -->
         <section class="section">
-            <h1>PAGE 2</h1>
+            <div class="awards-container">
+                <div class="awards-title">[수상 부문]</div>
+                
+                <div class="awards-grid">
+                    <div class="award-card">
+                        <span class="award-name">베스트 사진상</span>
+                        <span class="award-desc">다음 시상식을 장식할 올해 최고의 베스트컷</span>
+                    </div>
+                    <div class="award-card">
+                        <span class="award-name">베스트 플레이상</span>
+                        <span class="award-desc">올해 최고의 슈퍼플레이(게임)</span>
+                    </div>
+                    <div class="award-card">
+                        <span class="award-name">베스트 장기자랑상</span>
+                        <span class="award-desc">최고의 장기(臟器가능)자랑</span>
+                    </div>
+                    <div class="award-card">
+                        <span class="award-name">베스트 드레서</span>
+                        <span class="award-desc">오늘의 최고 착장 (드레스코드 추후 공지)</span>
+                    </div>
+                    <div class="award-card">
+                        <span class="award-name">베스트 병약상</span>
+                        <span class="award-desc">올해 최악의 건강검진</span>
+                    </div>
+                    <div class="award-card">
+                        <span class="award-name">베스트 축하상</span>
+                        <span class="award-desc">올해 최고의 축하받을일</span>
+                    </div>
+                    <div class="award-card">
+                        <span class="award-name">베스트 잼얘상</span>
+                        <span class="award-desc">올해 최고의 에피소드</span>
+                    </div>
+                    <div class="award-card">
+                        <span class="award-name">베스트 칭찬상(추천인)</span>
+                        <span class="award-desc">가장 칭찬하는 인물 추천</span>
+                    </div>
+                    <div class="award-card" style="grid-column: span 1;">
+                        <span class="award-name">와일드카드 특별상(추천인)</span>
+                        <span class="award-desc">위에 없는 새로운 상을 만들어서 추천</span>
+                    </div>
+                </div>
+
+                <div class="awards-notice">
+                    ※ 상기 시상 부문은 출품작 접수 및 현장 진행 상황에 따라 추가되거나 조정될 수 있습니다.
+                </div>
+            </div>
         </section>
+
         <section class="section">
             <h1>PAGE 3</h1>
         </section>
