@@ -212,7 +212,7 @@
             margin-bottom: 20px;
         }
 
-        /* 🏆 PAGE 3 (기존 PAGE 2) 수상 부문 컨테이너 */
+        /* 🏆 PAGE 3 수상 부문 컨테이너 */
         .awards-container {
             max-width: 850px;
             width: 90%;
@@ -345,12 +345,21 @@
             display: flex;
         }
 
+        /* 📍 상 이름 (사진 위 여백 지정) */
+        .slide-caption {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            line-height: 1.4;
+            word-break: keep-all;
+            margin-bottom: 14px;
+        }
+
         .slide-img {
             max-width: 100%;
-            max-height: 52vh;
+            max-height: 48vh;
             border-radius: 10px;
             object-fit: contain;
-            margin-bottom: 16px;
             cursor: zoom-in;
             transition: transform 0.2s ease;
         }
@@ -359,18 +368,10 @@
             transform: scale(1.02);
         }
 
-        .slide-caption {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: #1a1a1a;
-            line-height: 1.4;
-            word-break: keep-all;
-        }
-
         .slide-sub-caption {
             font-size: 0.92rem;
             color: rgba(40, 40, 40, 0.85);
-            margin-top: 6px;
+            margin-top: 10px;
             word-break: keep-all;
             font-weight: 600;
         }
@@ -380,6 +381,7 @@
             font-weight: 800;
             color: #1a1a1a;
             padding: 50px 10px;
+            margin-bottom: 0;
         }
 
         .card-badge-right {
@@ -677,7 +679,6 @@
                 margin-bottom: 12px;
             }
 
-            /* 모바일 타이머 조정 */
             .timer-top-gif {
                 width: 90px;
                 height: 90px;
@@ -728,7 +729,7 @@
                 min-height: 280px;
             }
             .slide-img {
-                max-height: 42vh;
+                max-height: 40vh;
             }
             .slide-card.text-only .slide-caption {
                 font-size: 1.3rem;
@@ -741,6 +742,7 @@
             }
             .slide-caption {
                 font-size: 1.05rem;
+                margin-bottom: 10px;
             }
             .slide-sub-caption {
                 font-size: 0.82rem;
@@ -819,7 +821,7 @@
         2026 제2회 거시기 연말 시상식
     </div>
 
-    <!-- 🔴 좌측 인디케이터 (총 6개 세로 점) -->
+    <!-- 🔴 좌측 인디케이터 (6개 세로 점) -->
     <div class="indicator">
         <div class="dot active" onclick="scrollToSection(0)"></div>
         <div class="dot" onclick="scrollToSection(1)"></div>
@@ -837,7 +839,7 @@
 
     <!-- 📜 메인 6개 섹션 영역 -->
     <div class="fullpage-container" id="mainContainer">
-        <!-- PAGE 1: 배경 + page1_2.png 이미지 + 하단 문구 -->
+        <!-- PAGE 1: 메인 비주얼 -->
         <section class="section">
             <div class="page1-container">
                 <img src="page1_2.png" alt="2026 거시기 시상식 메인 로고" class="page1-image">
@@ -847,7 +849,7 @@
             </div>
         </section>
 
-        <!-- ⏱️ PAGE 2: 12월 5일 D-Day 카운트다운 타이머 신규 추가 -->
+        <!-- PAGE 2: 12월 5일 D-Day 타이머 -->
         <section class="section">
             <div class="timer-container">
                 <div class="timer-title">거시기 연말 시상식 까지</div>
@@ -877,7 +879,7 @@
             </div>
         </section>
         
-        <!-- PAGE 3: 수상 부문 영역 -->
+        <!-- PAGE 3: 수상 부문 -->
         <section class="section">
             <div class="awards-container" id="awardsContainer">
                 <div class="awards-title">수상 부문</div>
@@ -927,7 +929,7 @@
             </div>
         </section>
 
-        <!-- PAGE 4: 2024년 제1회 거시기 연말 시상식 수상작 -->
+        <!-- PAGE 4: 2024년 수상작 (상 이름 사진 위로 이동) -->
         <section class="section">
             <div class="page3-container">
                 <div class="page3-title">2024년 제1회 거시기 연말 시상식 수상작</div>
@@ -937,16 +939,16 @@
 
                     <!-- 1번 작품 -->
                     <div class="slide-card active">
-                        <img src="251.png" alt="작품 1" class="slide-img" onclick="openImageModal(this.src)">
                         <div class="slide-caption">2024 올해의 사진상 : 김우진</div>
+                        <img src="251.png" alt="작품 1" class="slide-img" onclick="openImageModal(this.src)">
                         <img src="1.png" alt="1번 좌측 반전" class="card-badge-left">
                         <img src="1.png" alt="1번 우측" class="card-badge-right">
                     </div>
 
                     <!-- 2번 작품 -->
                     <div class="slide-card">
-                        <img src="c4.png" alt="작품 2" class="slide-img" onclick="openImageModal(this.src)">
                         <div class="slide-caption">2024 최고의 플레이상 : 이지환</div>
+                        <img src="c4.png" alt="작품 2" class="slide-img" onclick="openImageModal(this.src)">
                         <div class="slide-sub-caption">용량 문제로 4컷 만화로 대체되었습니다.</div>
                         <img src="2.gif" alt="2번 좌측 반전" class="card-badge-left">
                         <img src="2.gif" alt="2번 우측" class="card-badge-right">
@@ -954,16 +956,16 @@
 
                     <!-- 3번 작품 -->
                     <div class="slide-card">
-                        <img src="dh.png" alt="작품 3" class="slide-img" onclick="openImageModal(this.src)">
                         <div class="slide-caption">2024 최고 병약상 : 김동현</div>
+                        <img src="dh.png" alt="작품 3" class="slide-img" onclick="openImageModal(this.src)">
                         <img src="3.png" alt="3번 좌측 반전" class="card-badge-left">
                         <img src="3.png" alt="3번 우측" class="card-badge-right">
                     </div>
 
                     <!-- 4번 작품 -->
                     <div class="slide-card">
-                        <img src="mg.png" alt="작품 4" class="slide-img" onclick="openImageModal(this.src)">
                         <div class="slide-caption">2024 올해의 인물상 : 방기훈</div>
+                        <img src="mg.png" alt="작품 4" class="slide-img" onclick="openImageModal(this.src)">
                         <img src="4.png" alt="4번 좌측 반전" class="card-badge-left">
                         <img src="4.png" alt="4번 우측" class="card-badge-right">
                     </div>
@@ -1051,7 +1053,7 @@
     <script>
         // --- 📜 풀페이지 스크롤 제어 ---
         let currentIdx = 0;
-        const totalSections = 6; // 📌 총 섹션 수 6개로 업데이트
+        const totalSections = 6;
         let isScrolling = false;
         const container = document.getElementById('mainContainer');
         const dots = document.querySelectorAll('.indicator .dot');
@@ -1105,7 +1107,6 @@
             const endY = e.changedTouches[0].clientY;
             const diffY = startY - endY;
 
-            // PAGE 3 (수상 부문) 내부 스크롤 감지
             if (currentIdx === 2) {
                 const awardsBox = document.getElementById('awardsContainer');
                 const isAtTop = awardsBox.scrollTop <= 0;
@@ -1115,7 +1116,6 @@
                 if (diffY < 0 && !isAtTop) return;
             }
 
-            // PAGE 6 (행사 일정) 내부 스크롤 감지
             if (currentIdx === 5) {
                 const page5Box = document.getElementById('page5Container');
                 const isAtTop = page5Box.scrollTop <= 0;
@@ -1153,7 +1153,6 @@
             let targetYear = now.getFullYear();
             let targetDate = new Date(`${targetYear}-12-05T00:00:00`);
 
-            // 올해 12월 5일이 이미 지났다면 다음 해 12월 5일로 설정
             if (now > targetDate) {
                 targetYear += 1;
                 targetDate = new Date(`${targetYear}-12-05T00:00:00`);
@@ -1183,7 +1182,7 @@
         setInterval(updateTimer, 1000);
         updateTimer();
 
-        // --- 🎨 PAGE 4 수상작 슬라이더 제어 (무한 순환) ---
+        // --- 🎨 PAGE 4 수상작 슬라이더 제어 ---
         let currentAwardIdx = 0;
         const awardCards = document.querySelectorAll('.slide-card');
         const awardDots = document.querySelectorAll('.slide-dot-item');
