@@ -212,6 +212,15 @@
             margin-bottom: 20px;
         }
 
+        /* 📍 타이머 하단 커밍순 문구 스타일 */
+        .timer-coming-soon {
+            margin-top: 6px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #1a1a1a;
+            letter-spacing: 0.5px;
+        }
+
         /* 🏆 PAGE 3 수상 부문 컨테이너 */
         .awards-container {
             max-width: 850px;
@@ -345,7 +354,6 @@
             display: flex;
         }
 
-        /* 📍 상 이름 (사진 위 여백 지정) */
         .slide-caption {
             font-size: 1.25rem;
             font-weight: 800;
@@ -700,6 +708,9 @@
                 font-size: 1.4rem;
                 margin-bottom: 14px;
             }
+            .timer-coming-soon {
+                font-size: 1rem;
+            }
 
             .awards-grid {
                 grid-template-columns: 1fr;
@@ -876,6 +887,9 @@
                         <span class="timer-label">Secs</span>
                     </div>
                 </div>
+
+                <!-- 📍 타이머 하단 문구 (디데이 도달 시 자동 숨김) -->
+                <div class="timer-coming-soon" id="comingSoon">2026/12/5 comming soon</div>
             </div>
         </section>
         
@@ -929,7 +943,7 @@
             </div>
         </section>
 
-        <!-- PAGE 4: 2024년 수상작 (상 이름 사진 위로 이동) -->
+        <!-- PAGE 4: 2024년 수상작 -->
         <section class="section">
             <div class="page3-container">
                 <div class="page3-title">2024년 제1회 거시기 연말 시상식 수상작</div>
@@ -1147,27 +1161,27 @@
             }
         });
 
-        // --- ⏱️ 12월 5일 D-Day 카운트다운 타이머 스크립트 ---
+        // --- ⏱️ 2026년 12월 5일 D-Day 카운트다운 타이머 로직 ---
         function updateTimer() {
             const now = new Date();
-            let targetYear = now.getFullYear();
-            let targetDate = new Date(`${targetYear}-12-05T00:00:00`);
-
-            if (now > targetDate) {
-                targetYear += 1;
-                targetDate = new Date(`${targetYear}-12-05T00:00:00`);
-            }
-
+            const targetDate = new Date('2026-12-05T00:00:00');
             const diff = targetDate - now;
 
+            const comingSoonElem = document.getElementById('comingSoon');
+
+            // 🎯 디데이에 도달했거나 지났을 때
             if (diff <= 0) {
                 document.getElementById('days').innerText = '00';
                 document.getElementById('hours').innerText = '00';
                 document.getElementById('minutes').innerText = '00';
                 document.getElementById('seconds').innerText = '00';
+                
+                // 커밍순 문구 숨기기
+                comingSoonElem.style.display = 'none';
                 return;
             }
 
+            // ⏳ 카운트다운 진행 중
             const d = Math.floor(diff / (1000 * 60 * 60 * 24));
             const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
             const m = Math.floor((diff / (1000 * 60)) % 60);
@@ -1177,6 +1191,10 @@
             document.getElementById('hours').innerText = String(h).padStart(2, '0');
             document.getElementById('minutes').innerText = String(m).padStart(2, '0');
             document.getElementById('seconds').innerText = String(s).padStart(2, '0');
+            
+            // 디데이 전에는 문구 보이기
+            comingSoonElem.style.display = 'block';
+            comingSoonElem.innerText = '2026/12/5 comming soon';
         }
 
         setInterval(updateTimer, 1000);
