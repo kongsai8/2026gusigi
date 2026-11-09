@@ -58,7 +58,7 @@
             z-index: 2000;
         }
 
-        /* 🔴 좌측 인디케이터 */
+        /* 🔴 좌측 인디케이터 (6개 세로 점) */
         .indicator {
             position: fixed;
             left: 20px;
@@ -109,12 +109,13 @@
             padding: 20px;
         }
 
-        /* 🎨 PAGE 1 ~ PAGE 5 전체 가로 그라데이션 배경 통일 */
+        /* 🎨 PAGE 1 ~ PAGE 6 전체 가로 그라데이션 배경 통일 */
         .section:nth-child(1),
         .section:nth-child(2),
         .section:nth-child(3),
         .section:nth-child(4),
-        .section:nth-child(5) {
+        .section:nth-child(5),
+        .section:nth-child(6) {
             background: linear-gradient(to right, #9c9191, #c1b6b6, #9c9191);
         }
 
@@ -142,7 +143,76 @@
             word-break: keep-all;
         }
 
-        /* 🏆 PAGE 2 수상 부문 컨테이너 */
+        /* ⏱️ PAGE 2: 타이머 전용 레이아웃 */
+        .timer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 90%;
+            max-width: 750px;
+            color: #282828;
+            gap: 20px;
+        }
+
+        .timer-title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #8f2222;
+            word-break: keep-all;
+        }
+
+        .timer-top-gif {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.15));
+        }
+
+        .timer-box {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 24px 32px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .timer-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 70px;
+        }
+
+        .timer-num {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1;
+        }
+
+        .timer-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 8px;
+            text-transform: uppercase;
+        }
+
+        .timer-colon {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 20px;
+        }
+
+        /* 🏆 PAGE 3 (기존 PAGE 2) 수상 부문 컨테이너 */
         .awards-container {
             max-width: 850px;
             width: 90%;
@@ -202,7 +272,7 @@
             word-break: keep-all;
         }
 
-        /* 🎨 PAGE 3 2024 수상작 슬라이더 레이아웃 */
+        /* 🎨 PAGE 4 2024 수상작 슬라이더 레이아웃 */
         .page3-container {
             display: flex;
             flex-direction: column;
@@ -312,7 +382,6 @@
             padding: 50px 10px;
         }
 
-        /* 📍 PC 기준 스티커 스타일 (기존 3배 대형 크기 유지) */
         .card-badge-right {
             position: absolute;
             right: -60px;
@@ -358,7 +427,7 @@
             transform: scale(1.4);
         }
 
-        /* 🎨 PAGE 4 전용 레이아웃 */
+        /* 🎨 PAGE 5 전용 레이아웃 */
         .page4-container {
             display: flex;
             flex-direction: column;
@@ -387,7 +456,7 @@
             text-transform: lowercase;
         }
 
-        /* ✉️ PAGE 5 전용 레이아웃 */
+        /* ✉️ PAGE 6 전용 레이아웃 */
         .page5-container {
             display: flex;
             flex-direction: column;
@@ -578,7 +647,7 @@
             user-select: none;
         }
 
-        /* 📱 모바일 화면 대응 (스티커 가림 방지 최적화) */
+        /* 📱 모바일 화면 대응 */
         @media (max-width: 600px) {
             .top-left-nav {
                 top: 15px;
@@ -603,10 +672,34 @@
             .page1-notice {
                 font-size: 0.72rem;
             }
-            .awards-title, .page3-title, .page4-title {
+            .awards-title, .page3-title, .page4-title, .timer-title {
                 font-size: 1.3rem;
                 margin-bottom: 12px;
             }
+
+            /* 모바일 타이머 조정 */
+            .timer-top-gif {
+                width: 90px;
+                height: 90px;
+            }
+            .timer-box {
+                padding: 16px 20px;
+                gap: 10px;
+            }
+            .timer-unit {
+                min-width: 45px;
+            }
+            .timer-num {
+                font-size: 1.6rem;
+            }
+            .timer-label {
+                font-size: 0.7rem;
+            }
+            .timer-colon {
+                font-size: 1.4rem;
+                margin-bottom: 14px;
+            }
+
             .awards-grid {
                 grid-template-columns: 1fr;
                 gap: 8px;
@@ -653,7 +746,6 @@
                 font-size: 0.82rem;
             }
 
-            /* 📱 모바일 전용 스티커 크기 및 위치 조정 (내용 안 가리도록 최적화) */
             .card-badge-right {
                 right: -30px;
                 bottom: -35px;
@@ -727,13 +819,14 @@
         2026 제2회 거시기 연말 시상식
     </div>
 
-    <!-- 🔴 좌측 인디케이터 (5개 세로 점) -->
+    <!-- 🔴 좌측 인디케이터 (총 6개 세로 점) -->
     <div class="indicator">
         <div class="dot active" onclick="scrollToSection(0)"></div>
         <div class="dot" onclick="scrollToSection(1)"></div>
         <div class="dot" onclick="scrollToSection(2)"></div>
         <div class="dot" onclick="scrollToSection(3)"></div>
         <div class="dot" onclick="scrollToSection(4)"></div>
+        <div class="dot" onclick="scrollToSection(5)"></div>
     </div>
 
     <!-- 🔍 사진 원본 크게보기 팝업 모달 -->
@@ -742,7 +835,7 @@
         <img id="modalImg" src="" alt="확대된 작품 사진">
     </div>
 
-    <!-- 📜 메인 5개 섹션 영역 -->
+    <!-- 📜 메인 6개 섹션 영역 -->
     <div class="fullpage-container" id="mainContainer">
         <!-- PAGE 1: 배경 + page1_2.png 이미지 + 하단 문구 -->
         <section class="section">
@@ -753,8 +846,38 @@
                 </div>
             </div>
         </section>
+
+        <!-- ⏱️ PAGE 2: 12월 5일 D-Day 카운트다운 타이머 신규 추가 -->
+        <section class="section">
+            <div class="timer-container">
+                <div class="timer-title">거시기 연말 시상식 까지</div>
+                <img src="6.gif" alt="6 gif" class="timer-top-gif">
+                
+                <div class="timer-box">
+                    <div class="timer-unit">
+                        <span class="timer-num" id="days">00</span>
+                        <span class="timer-label">Days</span>
+                    </div>
+                    <span class="timer-colon">:</span>
+                    <div class="timer-unit">
+                        <span class="timer-num" id="hours">00</span>
+                        <span class="timer-label">Hours</span>
+                    </div>
+                    <span class="timer-colon">:</span>
+                    <div class="timer-unit">
+                        <span class="timer-num" id="minutes">00</span>
+                        <span class="timer-label">Mins</span>
+                    </div>
+                    <span class="timer-colon">:</span>
+                    <div class="timer-unit">
+                        <span class="timer-num" id="seconds">00</span>
+                        <span class="timer-label">Secs</span>
+                    </div>
+                </div>
+            </div>
+        </section>
         
-        <!-- PAGE 2: 수상 부문 영역 -->
+        <!-- PAGE 3: 수상 부문 영역 -->
         <section class="section">
             <div class="awards-container" id="awardsContainer">
                 <div class="awards-title">수상 부문</div>
@@ -804,7 +927,7 @@
             </div>
         </section>
 
-        <!-- PAGE 3: 2024년 제1회 거시기 연말 시상식 수상작 -->
+        <!-- PAGE 4: 2024년 제1회 거시기 연말 시상식 수상작 -->
         <section class="section">
             <div class="page3-container">
                 <div class="page3-title">2024년 제1회 거시기 연말 시상식 수상작</div>
@@ -866,7 +989,7 @@
             </div>
         </section>
 
-        <!-- PAGE 4: 단체티 투표 안내 -->
+        <!-- PAGE 5: 단체티 투표 안내 -->
         <section class="section">
             <div class="page4-container">
                 <div class="page4-title">2026 거시기 연말 시상식 단체티 디자인에 투표하세요</div>
@@ -874,7 +997,7 @@
             </div>
         </section>
 
-        <!-- PAGE 5: 세부 행사 일정 -->
+        <!-- PAGE 6: 세부 행사 일정 -->
         <section class="section">
             <div class="page5-container" id="page5Container">
                 <div class="page5-card">
@@ -889,7 +1012,7 @@
                         </div>
                         <div class="meta-item">
                             <span class="meta-label">준비물</span>
-                            <span class="meta-value">상품으로서 가치가 있는 애장품</span>
+                            <span class="meta-value">가치 있는 애장품</span>
                         </div>
                     </div>
                 </div>
@@ -928,7 +1051,7 @@
     <script>
         // --- 📜 풀페이지 스크롤 제어 ---
         let currentIdx = 0;
-        const totalSections = 5;
+        const totalSections = 6; // 📌 총 섹션 수 6개로 업데이트
         let isScrolling = false;
         const container = document.getElementById('mainContainer');
         const dots = document.querySelectorAll('.indicator .dot');
@@ -982,7 +1105,8 @@
             const endY = e.changedTouches[0].clientY;
             const diffY = startY - endY;
 
-            if (currentIdx === 1) {
+            // PAGE 3 (수상 부문) 내부 스크롤 감지
+            if (currentIdx === 2) {
                 const awardsBox = document.getElementById('awardsContainer');
                 const isAtTop = awardsBox.scrollTop <= 0;
                 const isAtBottom = Math.ceil(awardsBox.scrollTop + awardsBox.clientHeight) >= awardsBox.scrollHeight;
@@ -991,7 +1115,8 @@
                 if (diffY < 0 && !isAtTop) return;
             }
 
-            if (currentIdx === 4) {
+            // PAGE 6 (행사 일정) 내부 스크롤 감지
+            if (currentIdx === 5) {
                 const page5Box = document.getElementById('page5Container');
                 const isAtTop = page5Box.scrollTop <= 0;
                 const isAtBottom = Math.ceil(page5Box.scrollTop + page5Box.clientHeight) >= page5Box.scrollHeight;
@@ -1022,7 +1147,43 @@
             }
         });
 
-        // --- 🎨 PAGE 3 수상작 슬라이더 제어 (무한 순환) ---
+        // --- ⏱️ 12월 5일 D-Day 카운트다운 타이머 스크립트 ---
+        function updateTimer() {
+            const now = new Date();
+            let targetYear = now.getFullYear();
+            let targetDate = new Date(`${targetYear}-12-05T00:00:00`);
+
+            // 올해 12월 5일이 이미 지났다면 다음 해 12월 5일로 설정
+            if (now > targetDate) {
+                targetYear += 1;
+                targetDate = new Date(`${targetYear}-12-05T00:00:00`);
+            }
+
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                document.getElementById('days').innerText = '00';
+                document.getElementById('hours').innerText = '00';
+                document.getElementById('minutes').innerText = '00';
+                document.getElementById('seconds').innerText = '00';
+                return;
+            }
+
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const m = Math.floor((diff / (1000 * 60)) % 60);
+            const s = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('days').innerText = String(d).padStart(2, '0');
+            document.getElementById('hours').innerText = String(h).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(m).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(s).padStart(2, '0');
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // --- 🎨 PAGE 4 수상작 슬라이더 제어 (무한 순환) ---
         let currentAwardIdx = 0;
         const awardCards = document.querySelectorAll('.slide-card');
         const awardDots = document.querySelectorAll('.slide-dot-item');
